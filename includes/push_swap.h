@@ -31,6 +31,8 @@ typedef struct		s_list
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strlen(const char *s);
 void				ft_strclr(char *s);
+char				*ft_strcat(char *s1, const char *s2);
+
 
 /*
 **Initialisation (init.c)
@@ -53,5 +55,11 @@ int					chooseop(char *op, t_list **pileA, t_list **pileB);
 **Visualisation (visu.c)
 */
 int					visu(t_list **pileA, t_list **pileB);
+
+/*
+**Sort (bubble.c)
+*/
+char				*bubble(t_list **pileA, char *instructions);
+int					sort(t_list **pileA);
 
 #endif

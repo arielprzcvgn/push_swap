@@ -38,13 +38,13 @@ int     push(t_list **listfrom, t_list **listto)
     topush = *listfrom;
     (*listfrom)->prev->next = (*listfrom)->next;
     (*listfrom)->next->prev = (*listfrom)->prev;
-    *listfrom = (*listfrom)->next;
+    *listfrom = (*listfrom == (*listfrom)->next) ? NULL : (*listfrom)->next;
     if (*listto)
     {
         topush->next = *listto;
         topush->prev = (*listto)->prev;
         (*listto)->prev->next = topush;
-        (*listto)->next->prev = topush;
+        (*listto)->prev = topush;
     }
     else
     {

@@ -12,6 +12,20 @@
 
 #include "../includes/push_swap.h"
 
+
+
+
+
+
+
+
+
+//UTILISER MON PRINTF !!!
+
+
+
+
+
 int     visu(t_list **pileA, t_list **pileB)
 {
     t_list  *current;

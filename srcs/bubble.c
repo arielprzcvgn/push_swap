@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   bubble.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariperez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,62 +12,39 @@
 
 #include "../includes/push_swap.h"
 
-int		instruction(t_list **pileA, t_list **pileB)
-{
-	char	buf[BUFF_SIZE];
-	int		red;
-	int		end;
-
-	red = 0;
-	end = 0;
-	while ((red = read(0, buf, BUFF_SIZE)) > 0)
-	{
-		end = chooseop(buf, pileA, pileB);
-		visu(pileA, pileB);
-		if (end == 0)
-			return (0);
-		if (end == 2)
-			return (1);
-		ft_strclr(buf);
-	}
-	return (1);
-}
-
-int		sorted(int argc, t_list **pileA, t_list **pileB)
+int		sort(t_list **pileA)
 {
 	int		i;
 	t_list	*current;
 
-	if (*pileB != NULL)
-	{
-		write(1, "KO\n", 3);
-		return (0);
-	}
 	current = *pileA;
 	i = 1;
-	while(argc > 2 && current->next != *pileA)
+	while(current->next != *pileA)
 	{
 		if (current->content >= current->next->content)
-		{
-			write(1, "KO\n", 3);
 			return (0);
-		}
 		current = current->next;
 	}
-	write(1, "OK\n", 3);
 	return(1);
 }
 
-int		main(int argc, char **argv)
+char    *bubble(t_list **pileA, char *instructions)
 {
-	t_list	*pileA;
-	t_list	*pileB;
+    t_list  *current;
+    int     swap;
 
-	pileA = NULL;
-	pileB = NULL;
-	if (argc == 1)
-		return (0);
-	if (ps_init(argc, argv, &pileA) == 0 || instruction(&pileA, &pileB) == 0)
-		return (-1);
-	return (sorted(argc, &pileA, &pileB));
+    current = *pileA;
+    while (sort(pileA) != 1)
+    {
+        if (current->content > current->next->content)
+        {
+            swap = current->content;
+            current->content = current->next->content;
+            current->next->content = swap;
+            printf("lol\n");
+            ft_strcat(instructions, "sa\n"); //SEGFAULT
+        }
+        ft_strcat(instructions, "ra\n");
+    }
+    return (instructions);
 }

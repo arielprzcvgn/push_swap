@@ -6,13 +6,14 @@
 #    By: ariperez <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/13 14:43:48 by ariperez          #+#    #+#              #
-#    Updated: 2019/11/14 18:37:14 by ariperez         ###   ########.fr        #
+#    Updated: 2020/01/06 19:17:46 by ariperez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all clean fclean re main norme
 
-NAME	=	push_swap
+NAMEPS	=	push_swap
+NAMECHK	=	checker
 
 SRC_DIR =	./srcs
 INC_DIR =	./includes
@@ -20,47 +21,45 @@ OBJ_DIR =	./objs
 LIB_DIR	=	./libft
 
 INC_NAME=	push_swap.h
-SRC_NAME=	checker.c init.c operations.c visu.c
-OBJ_NAME=	$(SRC_NAME:.c=.o)
-LIB_NAME=	ft_strcmp.c ft_strlen.c ft_strclr.c
+S_CHK	=	checker.c operations.c visu.c init.c
+S_PS	=	push_swap.c bubble.c init.c
+O_CHK	=	$(S_CHK:.c=.o)
+O_PS	=	$(S_PS:.c=.o)
+LIB_NAME=	ft_strcmp.c ft_strlen.c ft_strclr.c ft_strcat.c
 LIB_OBJ	=	$(LIB_NAME:.c=.o)
 
 INC		=	$(addprefix $(INC_DIR)/, $(INC_NAME))
-SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_NAME))
-OBJ		=	$(addprefix $(OBJ_DIR)/, $(OBJ_NAME))
+SRC_CHK	=	$(addprefix $(SRC_DIR)/, $(S_CHK))
+SRC_PS	=	$(addprefix $(SRC_DIR)/, $(S_PS))
+OBJ_CHK	=	$(addprefix $(OBJ_DIR)/, $(O_CHK))
+OBJ_PS	=	$(addprefix $(OBJ_DIR)/, $(O_PS))
 LIB		=	$(addprefix $(LIB_DIR)/, $(LIB_NAME))
 OBJLIB	=	$(addprefix $(OBJ_DIR)/, $(LIB_OBJ))
 
 FLAGS	=	-Wall -Wextra -Werror
 
-all: $(NAME)
+all: $(NAMEPS)
 
-$(NAME):
-	@gcc -c $(FLAGS) $(SRC) $(LIB)
-	@mv $(OBJ_NAME) $(LIB_OBJ) $(OBJ_DIR)
-	@gcc -g $(OBJ) $(OBJLIB) -o checker
-	@echo "\033[1;32mPush_swap and Checker are ready.\033[0m"
+$(NAMEPS):
+	@gcc -c $(FLAGS) $(SRC_CHK)  $(LIB)
+	@mv $(O_CHK) $(LIB_OBJ) $(OBJ_DIR)
+	@gcc -g $(OBJ_CHK) $(OBJLIB) -o $(NAMECHK)
+	@echo "\033[1;32mChecker is ready.\033[0m"
+	@gcc -c $(FLAGS) $(SRC_PS) $(LIB)
+	@mv  $(O_PS) $(LIB_OBJ) $(OBJ_DIR)
+	@gcc -g $(OBJ_PS) $(OBJLIB) -o $(NAMEPS)
+	@echo "\033[1;32mPush_swap is ready.\033[0m"
 
 clean:
-	@rm -f $(OBJ) $(OBJLIB)
+	@rm -f $(OBJ_CHK) $(OBJ_PS) $(OBJLIB)
 	@echo "\033[1;31mObject files has been deleted.\033[0m"
 
 fclean: clean
-	@rm -f $(NAME) $(LIB_OBJ) $(OBJ_NAME)
-	@rm -f test debug
-	@echo "\033[1;31mPush_Swap has been deleted.\033[0m"
+	@rm -f $(NAMEPS) $(NAMECHK)
+	@echo "\033[1;31mPush_Swap and Checker has been deleted.\033[0m"
 
 re: fclean all
 
-main:
-	@gcc $(NAME) main.c -o test
-	@echo "Test main has been created."
-
-debug:
-	@gcc -g $(SRC) $(NAME) main.c -o debug
-	@echo "lldb file has been created."
-	@lldb ./debug
-
 norme:
 	@echo "\033[1;33mNorminette\033[0m"
-	@norminette $(INC) $(LIB) $(SRC)
+	@norminette $(INC) $(LIB) $(SRC_CHK) $(SRC_PS)
