@@ -26,10 +26,10 @@ int		is_sorted(t_list **pilea)
 	return (1);
 }
 
-char	*get_instructions(t_list **pilea, char *instructions)
+int		get_instructions(t_list **pilea)
 {
-	bubble(pilea, instructions);
-	return (instructions);
+	bubble(pilea);
+	return (1);
 }
 
 
@@ -37,16 +37,12 @@ int		main(int argc, char **argv)
 {
 	t_list		*pilea;
 	t_list		*pileb;
-	char		*instructions;
 
 	pilea = NULL;
 	pileb = NULL;
-	instructions = ft_memalloc(BUFF_SIZE);
 	if (argc == 1)
 		return (0);
-	if (ps_init(argc, argv, &pilea) == 0 ||
-		get_instructions(&pilea, instructions) == 0)
+	if (ps_init(argc, argv, &pilea) == 0 || get_instructions(&pilea) == 0)
 		return (-1);
-	printf("%s\n", instructions);
 	return (1);
 }

@@ -28,7 +28,7 @@ int		find_min(t_list **pilea)
 	return (min);
 }
 
-char	*bubble(t_list **pilea, char *instructions)
+int		bubble(t_list **pilea)
 {
 	t_list	*current;
 	int		swap;
@@ -44,13 +44,13 @@ char	*bubble(t_list **pilea, char *instructions)
 			swap = current->content;
 			current->content = current->next->content;
 			current->next->content = swap;
-			ft_strcat(instructions, "sa\n");
+			write(1, "sa\n", 3);
 		}
 		if (is_sorted(pilea) != 1)
 		{
 			*pilea = (*pilea)->prev;
-			ft_strcat(instructions, "rra\n");
+			write(1, "rra\n", 4);
 		}
 	}
-	return (instructions);
+	return (1);
 }
