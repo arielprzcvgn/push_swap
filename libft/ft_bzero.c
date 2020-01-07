@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariperez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 18:46:18 by ariperez          #+#    #+#             */
-/*   Updated: 2019/12/12 18:46:23 by ariperez         ###   ########.fr       */
+/*   Created: 2018/11/10 14:12:54 by ariperez          #+#    #+#             */
+/*   Updated: 2019/04/04 15:41:36 by ariperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		main(int argc, char **argv)
+void	*ft_bzero(void *b, size_t len)
 {
-	t_list		*pilea;
-	t_list		*pileb;
-	char		*instructions;
+	size_t			i;
+	unsigned char	*p;
 
-	pilea = NULL;
-	pileb = NULL;
-	instructions = ft_memalloc(BUFF_SIZE);
-	if (argc == 1)
-		return (0);
-	if (ps_init(argc, argv, &pilea) == 0 ||
-		bubble(&pilea, instructions) == 0)
-		return (-1);
-	printf("%s\n", instructions);
-	return (1);
+	p = b;
+	i = 0;
+	while (i < len)
+	{
+		*(p + i) = 0;
+		i++;
+	}
+	return (b);
 }

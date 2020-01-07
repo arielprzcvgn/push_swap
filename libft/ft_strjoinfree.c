@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strjoinfree.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariperez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 18:46:18 by ariperez          #+#    #+#             */
-/*   Updated: 2019/12/12 18:46:23 by ariperez         ###   ########.fr       */
+/*   Created: 2018/12/19 17:48:23 by ariperez          #+#    #+#             */
+/*   Updated: 2019/04/02 15:53:13 by ariperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		main(int argc, char **argv)
+char	*ft_strjoinfree(char *s1, char *s2, int frees1, int frees2)
 {
-	t_list		*pilea;
-	t_list		*pileb;
-	char		*instructions;
+	size_t	size;
+	char	*join;
 
-	pilea = NULL;
-	pileb = NULL;
-	instructions = ft_memalloc(BUFF_SIZE);
-	if (argc == 1)
-		return (0);
-	if (ps_init(argc, argv, &pilea) == 0 ||
-		bubble(&pilea, instructions) == 0)
-		return (-1);
-	printf("%s\n", instructions);
-	return (1);
+	if (!s1 || !s2)
+		return (NULL);
+	size = ft_strlen(s1) + ft_strlen(s2);
+	if ((join = (char *)malloc(sizeof(*join) * (size + 1))) == NULL)
+		return (NULL);
+	join = ft_strcpy(join, s1);
+	join = ft_strcat(join, s2);
+	if (frees1)
+		free(s1);
+	if (frees2)
+		free(s2);
+	return (join);
 }

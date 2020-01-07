@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariperez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 18:46:18 by ariperez          #+#    #+#             */
-/*   Updated: 2019/12/12 18:46:23 by ariperez         ###   ########.fr       */
+/*   Created: 2018/11/10 17:22:23 by ariperez          #+#    #+#             */
+/*   Updated: 2019/04/02 15:50:20 by ariperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		main(int argc, char **argv)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	t_list		*pilea;
-	t_list		*pileb;
-	char		*instructions;
+	size_t		i;
+	char		*d;
+	const char	*s;
 
-	pilea = NULL;
-	pileb = NULL;
-	instructions = ft_memalloc(BUFF_SIZE);
-	if (argc == 1)
-		return (0);
-	if (ps_init(argc, argv, &pilea) == 0 ||
-		bubble(&pilea, instructions) == 0)
-		return (-1);
-	printf("%s\n", instructions);
-	return (1);
+	d = dst;
+	s = src;
+	i = -1;
+	if (d < s)
+	{
+		while (++i < len)
+			*(d + i) = *(s + i);
+	}
+	else if (s < d)
+	{
+		while (++i < len)
+			*(d + len - i - 1) = *(s + len - i - 1);
+	}
+	return (dst);
 }

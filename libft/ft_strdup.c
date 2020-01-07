@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariperez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 18:46:18 by ariperez          #+#    #+#             */
-/*   Updated: 2019/12/12 18:46:23 by ariperez         ###   ########.fr       */
+/*   Created: 2018/11/14 13:03:33 by ariperez          #+#    #+#             */
+/*   Updated: 2019/04/02 15:52:51 by ariperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		main(int argc, char **argv)
+char	*ft_strdup(const char *s1)
 {
-	t_list		*pilea;
-	t_list		*pileb;
-	char		*instructions;
+	int		i;
+	char	*copy;
 
-	pilea = NULL;
-	pileb = NULL;
-	instructions = ft_memalloc(BUFF_SIZE);
-	if (argc == 1)
+	i = 0;
+	while (*(s1 + i) != '\0')
+		i++;
+	if ((copy = (char *)malloc(sizeof(*copy) * (i + 1))) == NULL)
 		return (0);
-	if (ps_init(argc, argv, &pilea) == 0 ||
-		bubble(&pilea, instructions) == 0)
-		return (-1);
-	printf("%s\n", instructions);
-	return (1);
+	i = 0;
+	while (*(s1 + i) != '\0')
+	{
+		*(copy + i) = (char)*(s1 + i);
+		i++;
+	}
+	*(copy + i) = '\0';
+	return (copy);
 }

@@ -12,39 +12,59 @@
 
 #include "../includes/push_swap.h"
 
-int		sort(t_list **pileA)
+int		sort(t_list **pilea)
 {
-	int		i;
 	t_list	*current;
 
-	current = *pileA;
-	i = 1;
-	while(current->next != *pileA)
+	current = *pilea;
+	while (current->next != *pilea)
 	{
 		if (current->content >= current->next->content)
 			return (0);
 		current = current->next;
 	}
-	return(1);
+	return (1);
 }
 
-char    *bubble(t_list **pileA, char *instructions)
+int		find_min(t_list **pilea)
 {
-    t_list  *current;
-    int     swap;
+	t_list	*current;
+	int		min;
 
-    current = *pileA;
-    while (sort(pileA) != 1)
-    {
-        if (current->content > current->next->content)
-        {
-            swap = current->content;
-            current->content = current->next->content;
-            current->next->content = swap;
-            printf("lol\n");
-            ft_strcat(instructions, "sa\n"); //SEGFAULT
-        }
-        ft_strcat(instructions, "ra\n");
-    }
-    return (instructions);
+	min = (*pilea)->content;
+	current = (*pilea)->next;
+	while (current != *pilea)
+	{
+		if (current->content < min)
+			min = current->content;
+		current = current->next;
+	}
+	return (min);
+}
+
+char	*bubble(t_list **pilea, char *instructions)
+{
+	t_list	*current;
+	int		swap;
+	int		min;
+
+	min = find_min(pilea);
+	while (sort(pilea) != 1)
+	{
+		current = *pilea;
+		if (current->content > current->next->content &&
+			current->next->content != min)
+		{
+			swap = current->content;
+			current->content = current->next->content;
+			current->next->content = swap;
+			ft_strcat(instructions, "sa\n");
+		}
+		if (sort(pilea) != 1)
+		{
+			*pilea = (*pilea)->prev;
+			ft_strcat(instructions, "rra\n");
+		}
+	}
+	return (instructions);
 }

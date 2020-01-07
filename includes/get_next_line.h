@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariperez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 18:46:18 by ariperez          #+#    #+#             */
-/*   Updated: 2019/12/12 18:46:23 by ariperez         ###   ########.fr       */
+/*   Created: 2018/12/18 11:07:48 by ariperez          #+#    #+#             */
+/*   Updated: 2019/04/04 15:58:18 by ariperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int		main(int argc, char **argv)
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include "push_swap.h"
+
+typedef struct		s_fd
 {
-	t_list		*pilea;
-	t_list		*pileb;
-	char		*instructions;
+	void			*buf;
+	size_t			fd;
+	int				red;
+	struct s_fd		*next;
+}					t_fd;
 
-	pilea = NULL;
-	pileb = NULL;
-	instructions = ft_memalloc(BUFF_SIZE);
-	if (argc == 1)
-		return (0);
-	if (ps_init(argc, argv, &pilea) == 0 ||
-		bubble(&pilea, instructions) == 0)
-		return (-1);
-	printf("%s\n", instructions);
-	return (1);
-}
+int					get_next_line(const int fd, char **line);
+
+#endif

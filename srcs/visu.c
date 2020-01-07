@@ -12,43 +12,31 @@
 
 #include "../includes/push_swap.h"
 
-
-
-
-
-
-
-
-
 //UTILISER MON PRINTF !!!
 
-
-
-
-
-int     visu(t_list **pileA, t_list **pileB)
+int		visu(t_list **pilea, t_list **pileb)
 {
-    t_list  *current;
+	t_list	*current;
 
-    current = *pileA;
-    printf("PileA |");
-    while (current && current->next != *pileA)
-    {
-        printf(" %i", current->content);
-        current = current->next;
-    }
-    if (current)
-        printf(" %i", current->content);
-    printf("\n");
-    current = *pileB;
-    printf("PileB |");
-    while (current && current->next != *pileB)
-    {
-        printf(" %i", current->content);
-        current = current->next;
-    }
-    if (current)
-        printf(" %i", current->content);
-    printf("\n");
-    return (1);
+	current = *pilea;
+	printf("Pile A |");
+	while (current && current->next != *pilea)
+	{
+		printf(" %i", current->content);
+		current = current->next;
+	}
+	if (current)
+		printf(" %i", current->content);
+	printf("\n");
+	current = *pileb;
+	printf("Pile B |");
+	while (current && current->next != *pileb)
+	{
+		printf(" %i", current->content);
+		current = current->next;
+	}
+	if (current)
+		printf(" %i", current->content);
+	printf("\n");
+	return (1);
 }

@@ -20,7 +20,7 @@ t_list	*ps_lstnew(t_list **list, int content)
 	if (!(new = malloc(sizeof(t_list))))
 		return (NULL);
 	if (!(new->content = (int)malloc(sizeof(content))))
-			return (NULL);
+		return (NULL);
 	new->content = content;
 	new->prev = NULL;
 	new->next = NULL;
@@ -45,13 +45,13 @@ int		ps_lstadd(t_list **list, int content)
 			return (0);
 		}
 		new->prev = current;
-		current = current->next;		
+		current = current->next;
 	}
 	new->prev->next = new;
 	return (1);
 }
 
-int		ps_atoi(const char *str, t_list **pileA)
+int		ps_atoi(const char *str, t_list **pilea)
 {
 	int		i;
 	int		negative;
@@ -74,29 +74,34 @@ int		ps_atoi(const char *str, t_list **pileA)
 		(number != negative * farfromint || ft_strlen(str) > 12)) &&
 		write(2, "Invalid argument\n", 18))
 		return (0);
-	if (*pileA == NULL)
-		return (ps_lstnew(pileA, number) ? 1 : 0);
-	return(ps_lstadd(pileA, number));
+	if (*pilea == NULL)
+		return (ps_lstnew(pilea, number) ? 1 : 0);
+	return (ps_lstadd(pilea, number));
 }
 
-int		ps_init(int argc, char **argv, t_list **pileA)
+int		ps_init(int argc, char **argv, t_list **pilea)
 {
 	int		i;
 	t_list	*current;
 
 	i = 0;
+	if (argc == 2)
+	{
+		argv = ft_strsplit(argv[1], ' ');
+		i = -1;
+	}
 	while (++i < argc)
 	{
-		if (!*argv[i] || ps_atoi(argv[i], pileA) == 0)
+		if (!*argv[i] || ps_atoi(argv[i], pilea) == 0)
 		{
-			write(2, "Error\n", 6);
+			write(2, "Error atoi\n", 6);
 			return (0);
 		}
 	}
-	current = *pileA;
+	current = *pilea;
 	while (current->next != NULL)
 		current = current->next;
-	current->next = *pileA;
-	(*pileA)->prev = current;
+	current->next = *pilea;
+	(*pilea)->prev = current;
 	return (1);
 }

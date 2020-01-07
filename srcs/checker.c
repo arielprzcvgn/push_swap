@@ -12,40 +12,38 @@
 
 #include "../includes/push_swap.h"
 
-int		instruction(t_list **pileA, t_list **pileB)
+int		instruction(t_list **pilea, t_list **pileb)
 {
-	char	buf[BUFF_SIZE];
-	int		red;
+	char	*inst;
 	int		end;
 
-	red = 0;
 	end = 0;
-	while ((red = read(0, buf, BUFF_SIZE)) > 0)
+	inst = ft_strnew(5);
+	while (get_next_line(0, &inst) == 1)
 	{
-		end = chooseop(buf, pileA, pileB);
-		visu(pileA, pileB);
+		end = chooseop(inst, pilea, pileb);
+		visu(pilea, pileb);
 		if (end == 0)
 			return (0);
 		if (end == 2)
 			return (1);
-		ft_strclr(buf);
 	}
 	return (1);
 }
 
-int		sorted(int argc, t_list **pileA, t_list **pileB)
+int		sorted(int argc, t_list **pilea, t_list **pileb)
 {
 	int		i;
 	t_list	*current;
 
-	if (*pileB != NULL)
+	if (*pileb != NULL)
 	{
 		write(1, "KO\n", 3);
 		return (0);
 	}
-	current = *pileA;
+	current = *pilea;
 	i = 1;
-	while(argc > 2 && current->next != *pileA)
+	while (argc > 2 && current->next != *pilea)
 	{
 		if (current->content >= current->next->content)
 		{
@@ -55,19 +53,19 @@ int		sorted(int argc, t_list **pileA, t_list **pileB)
 		current = current->next;
 	}
 	write(1, "OK\n", 3);
-	return(1);
+	return (1);
 }
 
 int		main(int argc, char **argv)
 {
-	t_list	*pileA;
-	t_list	*pileB;
+	t_list	*pilea;
+	t_list	*pileb;
 
-	pileA = NULL;
-	pileB = NULL;
+	pilea = NULL;
+	pileb = NULL;
 	if (argc == 1)
 		return (0);
-	if (ps_init(argc, argv, &pileA) == 0 || instruction(&pileA, &pileB) == 0)
+	if (ps_init(argc, argv, &pilea) == 0 || instruction(&pilea, &pileb) == 0)
 		return (-1);
-	return (sorted(argc, &pileA, &pileB));
+	return (sorted(argc, &pilea, &pileb));
 }

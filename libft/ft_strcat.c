@@ -16,7 +16,7 @@ char	*ft_strcat(char *s1, const char *s2)
 {
 	int		i;
 	int		j;
-	char		*copy;
+	char	*copy;
 
 	copy = (char *)s2;
 	i = 0;
