@@ -90,7 +90,7 @@ int		ps_init(int argc, char **argv, t_list **pilea)
 		argv = ft_strsplit(argv[1], ' ');
 		i = -1;
 	}
-	while (++i < argc)
+	while (argv[++i])
 	{
 		if (!*argv[i] || ps_atoi(argv[i], pilea) == 0)
 		{

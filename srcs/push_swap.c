@@ -12,6 +12,27 @@
 
 #include "../includes/push_swap.h"
 
+int		is_sorted(t_list **pilea)
+{
+	t_list	*current;
+
+	current = *pilea;
+	while (current->next != *pilea)
+	{
+		if (current->content >= current->next->content)
+			return (0);
+		current = current->next;
+	}
+	return (1);
+}
+
+char	*get_instructions(t_list **pilea, char *instructions)
+{
+	bubble(pilea, instructions);
+	return (instructions);
+}
+
+
 int		main(int argc, char **argv)
 {
 	t_list		*pilea;
@@ -24,7 +45,7 @@ int		main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	if (ps_init(argc, argv, &pilea) == 0 ||
-		bubble(&pilea, instructions) == 0)
+		get_instructions(&pilea, instructions) == 0)
 		return (-1);
 	printf("%s\n", instructions);
 	return (1);

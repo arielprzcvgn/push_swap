@@ -12,20 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-int		sort(t_list **pilea)
-{
-	t_list	*current;
-
-	current = *pilea;
-	while (current->next != *pilea)
-	{
-		if (current->content >= current->next->content)
-			return (0);
-		current = current->next;
-	}
-	return (1);
-}
-
 int		find_min(t_list **pilea)
 {
 	t_list	*current;
@@ -49,7 +35,7 @@ char	*bubble(t_list **pilea, char *instructions)
 	int		min;
 
 	min = find_min(pilea);
-	while (sort(pilea) != 1)
+	while (is_sorted(pilea) != 1)
 	{
 		current = *pilea;
 		if (current->content > current->next->content &&
@@ -60,7 +46,7 @@ char	*bubble(t_list **pilea, char *instructions)
 			current->next->content = swap;
 			ft_strcat(instructions, "sa\n");
 		}
-		if (sort(pilea) != 1)
+		if (is_sorted(pilea) != 1)
 		{
 			*pilea = (*pilea)->prev;
 			ft_strcat(instructions, "rra\n");

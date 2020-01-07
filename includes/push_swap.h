@@ -19,7 +19,7 @@
 # include <stdarg.h>
 # include <stdio.h> //DEBUG
 
-# define BUFF_SIZE 500
+# define BUFF_SIZE 1000000
 
 typedef struct		s_list
 {
@@ -51,10 +51,16 @@ int					chooseop(char *op, t_list **pilea, t_list **pileb);
 int					visu(t_list **pilea, t_list **pileb);
 
 /*
-**Sort (bubble.c)
+**Sort (push_swap.c)
+*/
+int					is_sorted(t_list **pilea);
+char				*get_instructions(t_list **pilea, char *instructions);
+
+/*
+**Bubble (bubble.c)
 */
 char				*bubble(t_list **pilea, char *instructions);
-int					sort(t_list **pilea);
+
 
 /*
 **libft
