@@ -22,7 +22,7 @@ int		instruction(t_list **pilea, t_list **pileb)
 	while (get_next_line(0, &inst) == 1)
 	{
 		end = chooseop(inst, pilea, pileb);
-		//visu(pilea, pileb);
+		visu(pilea, pileb);
 		if (end == 0)
 			return (0);
 		if (end == 2)

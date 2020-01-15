@@ -12,10 +12,28 @@
 
 #include "../includes/push_swap.h"
 
-int		is_sorted(t_list **pilea)
+int		find_min(t_list **pilea)
+{
+	t_list	*current;
+	int		min;
+
+	min = (*pilea)->content;
+	current = (*pilea)->next;
+	while (current != *pilea)
+	{
+		if (current->content < min)
+			min = current->content;
+		current = current->next;
+	}
+	return (min);
+}
+
+int		is_sorted(t_list **pilea, t_list **pileb)
 {
 	t_list	*current;
 
+	if (*pileb != NULL)
+		return (0);
 	current = *pilea;
 	while (current->next != *pilea)
 	{
@@ -26,9 +44,10 @@ int		is_sorted(t_list **pilea)
 	return (1);
 }
 
-int		get_instructions(t_list **pilea)
+int		sorting(t_list **pilea, t_list **pileb)
 {
-	bubble(pilea);
+	//bubble(pilea, pileb);
+	quick(pilea, pileb, 1);
 	return (1);
 }
 
@@ -42,7 +61,7 @@ int		main(int argc, char **argv)
 	pileb = NULL;
 	if (argc == 1)
 		return (0);
-	if (ps_init(argc, argv, &pilea) == 0 || get_instructions(&pilea) == 0)
+	if (ps_init(argc, argv, &pilea) == 0 || sorting(&pilea, &pileb) == 0)
 		return (-1);
 	return (1);
 }

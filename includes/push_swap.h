@@ -26,6 +26,7 @@ typedef struct		s_list
 	int				content;
 	struct s_list	*prev;
 	struct s_list	*next;
+	int				partition;
 }					t_list;
 
 /*
@@ -53,13 +54,16 @@ int					visu(t_list **pilea, t_list **pileb);
 /*
 **Sort (push_swap.c)
 */
-int					is_sorted(t_list **pilea);
-int					get_instructions(t_list **pilea);
+int					find_min(t_list **pilea);
+int					is_sorted(t_list **pilea, t_list **pileb);
+int					sorting(t_list **pilea, t_list **pileb);
 
 /*
-**Bubble (bubble.c)
+**Sort Algorithm (bubble.c - )
 */
-int					bubble(t_list **pilea);
+int					bubble(t_list **pilea, t_list **pileb);
+void				quick(t_list **pilea, t_list **pileb, int a);
+t_list				*findpivot(t_list **pile);
 
 
 /*

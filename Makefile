@@ -22,7 +22,7 @@ LIB_DIR	=	./libft
 
 INC_NAME=	push_swap.h get_next_line.h
 S_CHK	=	checker.c operations.c visu.c init.c
-S_PS	=	push_swap.c bubble.c init.c
+S_PS	=	push_swap.c bubble.c init.c operations.c quick.c visu.c
 O_CHK	=	$(S_CHK:.c=.o)
 O_PS	=	$(S_PS:.c=.o)
 LIB_NAME=	ft_strcmp.c ft_strnew.c ft_strdup.c ft_strlen.c ft_strclr.c \

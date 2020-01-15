@@ -24,6 +24,7 @@ t_list	*ps_lstnew(t_list **list, int content)
 	new->content = content;
 	new->prev = NULL;
 	new->next = NULL;
+	new->partition = 0;
 	if (*list == NULL)
 		*list = new;
 	return (new);
@@ -94,7 +95,7 @@ int		ps_init(int argc, char **argv, t_list **pilea)
 	{
 		if (!*argv[i] || ps_atoi(argv[i], pilea) == 0)
 		{
-			write(2, "Error atoi\n", 6);
+			write(2, "Error atoi\n", 11);
 			return (0);
 		}
 	}
