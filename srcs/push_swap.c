@@ -28,6 +28,22 @@ int		find_min(t_list **pilea)
 	return (min);
 }
 
+int		find_max(t_list **pilea)
+{
+	t_list	*current;
+	int		max;
+
+	max = (*pilea)->content;
+	current = (*pilea)->next;
+	while (current != *pilea)
+	{
+		if (current->content > max)
+			max = current->content;
+		current = current->next;
+	}
+	return (max);
+}
+
 int		is_sorted(t_list **pilea, t_list **pileb)
 {
 	t_list	*current;
@@ -37,7 +53,7 @@ int		is_sorted(t_list **pilea, t_list **pileb)
 	current = *pilea;
 	while (current->next != *pilea)
 	{
-		if (current->content >= current->next->content)
+		if (current->content > current->next->content)
 			return (0);
 		current = current->next;
 	}
@@ -46,8 +62,8 @@ int		is_sorted(t_list **pilea, t_list **pileb)
 
 int		sorting(t_list **pilea, t_list **pileb)
 {
-	//bubble(pilea, pileb);
 	quick(pilea, pileb, 1);
+	//bubble(pilea, pileb);
 	return (1);
 }
 

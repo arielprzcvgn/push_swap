@@ -55,15 +55,16 @@ int					visu(t_list **pilea, t_list **pileb);
 **Sort (push_swap.c)
 */
 int					find_min(t_list **pilea);
+int					find_max(t_list **pilea);
 int					is_sorted(t_list **pilea, t_list **pileb);
 int					sorting(t_list **pilea, t_list **pileb);
 
 /*
-**Sort Algorithm (bubble.c - )
+**Sort Algorithm (bubble.c - quick.c)
 */
 int					bubble(t_list **pilea, t_list **pileb);
 void				quick(t_list **pilea, t_list **pileb, int a);
-t_list				*findpivot(t_list **pile);
+t_list				*findpivot(t_list **pile, int a);
 
 
 /*

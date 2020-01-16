@@ -12,11 +12,11 @@
 
 #include "../includes/push_swap.h"
 
-t_list	*findpivot(t_list **pile)
+t_list	*findpivot_b(t_list **pile)
 {
 	t_list	*current;
 	
-	current = (*pile)->prev;
+	current = (*pile)->next;
 	while (current != *pile)
 	{
 		if (current->content < current->prev->content)
@@ -26,17 +26,38 @@ t_list	*findpivot(t_list **pile)
 	return (NULL);
 }
 
+t_list	*findpivot(t_list **pile, int a)
+{
+	t_list	*current;
+	
+	if (*pile == NULL)
+		return (NULL);
+	current = (*pile)->prev;
+	while (current != *pile)
+	{
+		if (a * current->content < a * current->prev->content)
+			return(current);
+		current = current->prev;
+	}
+	return (NULL);
+}
+
 t_list	*partition(t_list **pile, t_list **to_push, t_list *pivot, int a)
 {
 	t_list	*current;
-	t_list	*next;
+	int		stop;
 
-	next = NULL;
-	current = *pile;
-	while (current != pivot)
+	while (a == -1 && *pile && findpivot(pile, a) == NULL)
 	{
-		if (current->next == pivot)
-			next = current;
+		push(pile, to_push);
+		write(1, "pa\n", 3);
+	}
+	if (pivot == NULL)
+		return (NULL);
+	current = *pile;
+	stop = (*pile)->prev->content;
+	while (current->content != pivot->content)
+	{
 		if (a * current->content > a * current->next->content)
 		{
 			swap(pile);
@@ -57,24 +78,19 @@ t_list	*partition(t_list **pile, t_list **to_push, t_list *pivot, int a)
 		//write(1, (a == 1? "Normal\n" : "Reverse\n"), 8);
 		//visu(pile, to_push);
 	}
-	if (a == -1 && *pile == (*pile)->next)
-	{
-		push(pile, to_push);
-		write(1, "pa\n", 3);
-	}
-	return (next);
+	return (findpivot(pile, a));
 }
 
 void	quick(t_list **pilea, t_list **pileb, int a)
 {
-	if (findpivot(pilea))
+	if (is_sorted(pilea, pileb) != 1)
 	{
-		if (a == 1 && partition(pilea, pileb, findpivot(pilea), a) != NULL)
+		if (a == 1 && partition(pilea, pileb, findpivot(pilea, a), a))
 		{
 			quick(pilea, pileb, 1);
 			quick(pilea, pileb, -1);
 		}
-		if (a == -1 && partition(pileb, pilea, (*pileb? (*pileb)->prev : NULL), a) != NULL)
+		if (a == -1 && partition(pileb, pilea, findpivot(pileb, a), a))
 		{
 			quick(pilea, pileb, -1);
 			quick(pilea, pileb, 1);
