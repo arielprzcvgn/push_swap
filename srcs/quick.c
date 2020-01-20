@@ -12,18 +12,22 @@
 
 #include "../includes/push_swap.h"
 
-t_list	*findpivot_b(t_list **pile)
+t_list	*findmed(t_list **pile)
 {
 	t_list	*current;
+	t_list	*med;
+	int		mediane;
 	
-	current = (*pile)->next;
-	while (current != *pile)
+	current = *pile;
+	med = (*pile)->prev;
+	mediane = (find_min(pile) + find_max(pile)) / 2;
+	while (current != (*pile)->prev)
 	{
-		if (current->content < current->prev->content)
-			return(current);
-		current = current->prev;
+		if (med->content < current->content && current->content <= mediane)
+			med = current;
+		current = current->next;
 	}
-	return (NULL);
+	return (med);
 }
 
 t_list	*findpivot(t_list **pile, int a)
@@ -56,9 +60,11 @@ t_list	*partition(t_list **pile, t_list **to_push, t_list *pivot, int a)
 		return (NULL);
 	current = *pile;
 	stop = (*pile)->prev->content;
+	//printf("%i\n", pivot->content);
 	while (current->content != pivot->content)
 	{
-		if (a * current->content > a * current->next->content)
+		if (a * current->content > a * current->next->content &&
+		a * current->content < a * pivot->content)
 		{
 			swap(pile);
 			write(1, (a == 1? "sa\n" : "sb\n"), 3);
