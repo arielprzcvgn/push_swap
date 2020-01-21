@@ -62,7 +62,8 @@ int		is_sorted(t_list **pilea, t_list **pileb)
 
 int		sorting(t_list **pilea, t_list **pileb)
 {
-	quick(pilea, pileb, 1);
+	//perso(pilea, pileb, 1);
+	quick(pilea, pileb, (*pilea)->prev, 1);
 	//bubble(pilea, pileb);
 	return (1);
 }

@@ -63,8 +63,8 @@ int					sorting(t_list **pilea, t_list **pileb);
 **Sort Algorithm (bubble.c - quick.c)
 */
 int					bubble(t_list **pilea, t_list **pileb);
-void				quick(t_list **pilea, t_list **pileb, int a);
-t_list				*findpivot(t_list **pile, int a);
+void				perso(t_list **pilea, t_list **pileb, int a);
+void				quick(t_list **pilea, t_list **pileb, t_list *part, int a);
 
 
 /*
