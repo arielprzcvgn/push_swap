@@ -63,7 +63,8 @@ t_list	*partition(t_list **pile, t_list **to_push, t_list *pivot, t_list *part, 
 	t_list	*current;
 	int		stop;
 
-	while (a == -1 && *pile && findpivot(pile, a) == NULL)
+	while (a == -1 && *pile && findpivot(pile, a) == NULL &&
+	findpivot(to_push, -a) == NULL)
 	{
 		push(pile, to_push);
 		write(1, "pa\n", 3);
@@ -72,7 +73,7 @@ t_list	*partition(t_list **pile, t_list **to_push, t_list *pivot, t_list *part, 
 		return (NULL);
 	current = *pile;
 	stop = (*pile)->prev->content;
-	printf("Pivot : %i\n", pivot->content);
+	//printf("Pivot : %i\n", pivot->content);
 	while (current->content != part->content)
 	{
 		if (a * current->content <= a * pivot->content)
@@ -87,8 +88,8 @@ t_list	*partition(t_list **pile, t_list **to_push, t_list *pivot, t_list *part, 
 			rotate(pile, 0);
 			write(1, (a == 1? "ra\n" : "rb\n"), 3);
 		}
-		write(1, (a == 1? "Normal \n" : "Reverse\n"), 8);
-		visu(pile, to_push);
+		//write(1, (a == 1? "Normal \n" : "Reverse\n"), 8);
+		//visu(pile, to_push);
 	}
 	return (*to_push);
 }
@@ -100,14 +101,14 @@ void	quick(t_list **pilea, t_list **pileb, t_list *part, int a)
 		if (a == 1 && (part = partition(pilea, pileb, findmed(pilea, part), part, a)))
 		{
 			quick(pilea, pileb, (*pilea)->prev, 1);
-			printf("A %i\n", part->content);
+			//printf("A %i\n", part->content);
 			quick(pilea, pileb, part, -1);
 		}
 		if (a == -1 && (part = partition(pileb, pilea, findmed(pileb, part), part, a)))
 		{
-			//exit(0);
 			quick(pilea, pileb, (*pileb)->prev, -1);
-			printf("B %i\n", part->content);
+			exit(0);
+			//printf("B %i\n", part->content);
 			quick(pilea, pileb, part, 1);
 		}
 	}

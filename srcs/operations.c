@@ -29,6 +29,26 @@ int		swap(t_list **list)
 	return (0);
 }
 
+int		swapp(t_list **list)
+{
+	t_list		*swap;
+
+	if (*list && (*list)->next != *list)
+	{
+		swap = *list;
+		*list = (*list)->next;
+
+		(*list)->prev = swap->prev;
+		(*list)->prev->next = *list;
+		swap->next = (*list)->next;
+		swap->next->prev = swap;
+		(*list)->next = swap;
+		swap->prev = *list;
+		return (1);
+	}
+	return (0);
+}
+
 int		push(t_list **listfrom, t_list **listto)
 {
 	t_list		*topush;

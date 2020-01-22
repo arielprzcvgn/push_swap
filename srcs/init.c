@@ -42,7 +42,7 @@ int		ps_lstadd(t_list **list, int content)
 	{
 		if (current->content == content)
 		{
-			write(2, "Duplicate\n", 10);
+			ft_printf("Duplicate\n");
 			return (0);
 		}
 		new->prev = current;
@@ -73,7 +73,7 @@ int		ps_atoi(const char *str, t_list **pilea)
 	number = negative * farfromint;
 	if (((str[i] && (str[i] < '0' || '9' < str[i])) ||
 		(number != negative * farfromint || ft_strlen(str) > 12)) &&
-		write(2, "Invalid argument\n", 18))
+		ft_printf("Invalid argument\n"))
 		return (0);
 	if (*pilea == NULL)
 		return (ps_lstnew(pilea, number) ? 1 : 0);
@@ -95,7 +95,7 @@ int		ps_init(int argc, char **argv, t_list **pilea)
 	{
 		if (!*argv[i] || ps_atoi(argv[i], pilea) == 0)
 		{
-			write(2, "Error atoi\n", 11);
+			ft_printf("Error atoi\n");
 			return (0);
 		}
 	}

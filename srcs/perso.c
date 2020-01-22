@@ -43,7 +43,7 @@ t_list	*part(t_list **pile, t_list **to_push, t_list *pivot, int a)
 	current = *pile;
 	stop = (*pile)->prev->content;
 	//printf("%i\n", pivot->content);
-	while (current->content != pivot->content)
+	while (current != pivot)
 	{
 		if (a * current->content > a * current->next->content &&
 		a * current->content < a * pivot->content)

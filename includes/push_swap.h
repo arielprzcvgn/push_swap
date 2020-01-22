@@ -48,24 +48,24 @@ int					chooseop(char *op, t_list **pilea, t_list **pileb);
 
 /*
 **Visualisation (visu.c)
-*/
+*
 int					visu(t_list **pilea, t_list **pileb);
-
+*/
 /*
 **Sort (push_swap.c)
-*/
+*
 int					find_min(t_list **pilea);
 int					find_max(t_list **pilea);
 int					is_sorted(t_list **pilea, t_list **pileb);
 int					sorting(t_list **pilea, t_list **pileb);
-
+*/
 /*
 **Sort Algorithm (bubble.c - quick.c)
-*/
+
 int					bubble(t_list **pilea, t_list **pileb);
 void				perso(t_list **pilea, t_list **pileb, int a);
 void				quick(t_list **pilea, t_list **pileb, t_list *part, int a);
-
+*/
 
 /*
 **libft
@@ -84,5 +84,6 @@ void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memset(void *b, int c, size_t len);
 int					get_next_line(const int fd, char **line);
 char				**ft_strsplit(char const *s, char c);
+int					ft_printf(const char *format, ...);
 
 #endif
