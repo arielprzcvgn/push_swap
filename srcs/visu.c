@@ -23,7 +23,7 @@ void	visu(t_list **a, t_list **b)
 		ft_printf(" %i", current->val);
 		current = current->next;
 	}
-	ft_printf("\nPile B |");
+	ft_printf("\nPile B | ");
 	current = *b;
 	while (current)
 	{
