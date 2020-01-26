@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visu.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariperez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/13 17:22:10 by ariperez          #+#    #+#             */
-/*   Updated: 2019/11/19 18:00:55 by ariperez         ###   ########.fr       */
+/*   Created: 2018/11/10 14:36:34 by ariperez          #+#    #+#             */
+/*   Updated: 2019/08/27 14:17:19 by ariperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/libftprintf.h"
 
-void	visu(t_list **a, t_list **b)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	t_list	*current;
+	size_t		i;
+	char		*d;
+	char		*s;
 
-	ft_printf("Pile A |");
-	current = *a;
-	while (current)
+	i = 0;
+	d = (char*)dst;
+	s = (char*)src;
+	while (i < n)
 	{
-		ft_printf(" %i", current->val);
-		current = current->next;
+		*(d + i) = *(s + i);
+		i++;
 	}
-	ft_printf("\nPile B |");
-	current = *b;
-	while (current)
-	{
-		ft_printf(" %i", current->val);
-		current = current->next;
-	}
-	ft_printf("\n");
+	return (dst);
 }

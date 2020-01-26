@@ -12,39 +12,35 @@
 
 #include "../includes/push_swap.h"
 
-t_list	*ps_lstnew(t_list **list, int content)
+t_list	*ps_lstnew(t_list **list, int val)
 {
 	t_list	*new;
 
 	new = NULL;
 	if (!(new = malloc(sizeof(t_list))))
 		return (NULL);
-	if (!(new->content = (int)malloc(sizeof(content))))
+	if (!(new->val = (int)malloc(sizeof(val))))
 		return (NULL);
-	new->content = content;
+	new->val = val;
 	new->prev = NULL;
 	new->next = NULL;
-	new->partition = 0;
 	if (*list == NULL)
 		*list = new;
 	return (new);
 }
 
-int		ps_lstadd(t_list **list, int content)
+int		ps_lstadd(t_list **list, int val)
 {
 	t_list	*new;
 	t_list	*current;
 
-	if ((new = ps_lstnew(list, content)) == NULL)
+	if ((new = ps_lstnew(list, val)) == NULL)
 		return (0);
 	current = *list;
 	while (current)
 	{
-		if (current->content == content)
-		{
-			ft_printf("Duplicate\n");
+		if (current->val == val && ft_printf("Duplicate\n"))
 			return (0);
-		}
 		new->prev = current;
 		current = current->next;
 	}
@@ -52,57 +48,53 @@ int		ps_lstadd(t_list **list, int content)
 	return (1);
 }
 
-int		ps_atoi(const char *str, t_list **pilea)
+int		ps_atoi(const char *str, t_list **a)
 {
 	int		i;
-	int		negative;
-	int		number;
+	int		neg;
+	int		nbr;
 	long	farfromint;
 
 	i = 0;
 	farfromint = 0;
-	negative = 1;
+	neg = 1;
 	if (str[i] == '+' || str[i] == '-')
-		negative = (str[i++] == '-') ? -1 : 1;
+		neg = (str[i++] == '-') ? -1 : 1;
 	while ('0' <= str[i] && str[i] <= '9')
 	{
 		farfromint = farfromint * 10;
 		farfromint += (str[i] - '0');
 		i++;
 	}
-	number = negative * farfromint;
+	nbr = neg * farfromint;
 	if (((str[i] && (str[i] < '0' || '9' < str[i])) ||
-		(number != negative * farfromint || ft_strlen(str) > 12)) &&
+		(nbr != neg * farfromint || ft_strlen(str) > 12)) &&
 		ft_printf("Invalid argument\n"))
 		return (0);
-	if (*pilea == NULL)
-		return (ps_lstnew(pilea, number) ? 1 : 0);
-	return (ps_lstadd(pilea, number));
+	if (*a == NULL)
+		return (ps_lstnew(a, nbr) ? 1 : 0);
+	return (ps_lstadd(a, nbr));
 }
 
-int		ps_init(int argc, char **argv, t_list **pilea)
+int		ps_init(int argc, char **argv, t_list **a)
 {
 	int		i;
 	t_list	*current;
 
 	i = 0;
-	if (argc == 2)
-	{
+	if (argc == 2 && (i = -1))
 		argv = ft_strsplit(argv[1], ' ');
-		i = -1;
-	}
 	while (argv[++i])
 	{
-		if (!*argv[i] || ps_atoi(argv[i], pilea) == 0)
+		if (!*argv[i] || ps_atoi(argv[i], a) == 0)
 		{
 			ft_printf("Error atoi\n");
 			return (0);
 		}
 	}
-	current = *pilea;
-	while (current->next != NULL)
+	current = *a;
+	while (current->next)
 		current = current->next;
-	current->next = *pilea;
-	(*pilea)->prev = current;
+	(*a)->prev = current;
 	return (1);
 }

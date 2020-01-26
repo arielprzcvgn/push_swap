@@ -20,14 +20,16 @@ INC_DIR =	./includes
 OBJ_DIR =	./objs
 LIB_DIR	=	./libft
 
-INC_NAME=	push_swap.h get_next_line.h
-S_CHK	=	checker.c operations.c visu.c init.c
-S_PS	=	push_swap.c bubble.c init.c operations.c quick.c visu.c perso.c
+INC_NAME=	push_swap.h get_next_line.h libftprintf.h
+S_CHK	=	checker.c init.c operations.c visu.c
+S_PS	=	push_swap.c init.c operations.c visu.c
 O_CHK	=	$(S_CHK:.c=.o)
 O_PS	=	$(S_PS:.c=.o)
-LIB_NAME=	ft_strcmp.c ft_strnew.c ft_strdup.c ft_strlen.c ft_strclr.c \
-			ft_strcat.c	ft_strjoinfree.c ft_memalloc.c ft_bzero.c ft_memmove.c \
-			ft_memset.c ft_strcpy.c get_next_line.c ft_strsplit.c
+LIB_NAME=	ft_atoi.c ft_memcpy.c ft_putchar.c ft_strcmp.c ft_strnew.c speci_c.c speci_s.c\
+			ft_bzero.c ft_memmove.c ft_putstr.c ft_strcpy.c ft_strsplit.c speci_d_i.c speci_u.c\
+			ft_conv_base.c ft_memset.c ft_putstr_fd.c ft_strdup.c get_next_line.c speci_f.c speci_x.c\
+			ft_itoa.c ft_power.c ft_strcat.c ft_strjoinfree.c pfparsing.c speci_o.c\
+			ft_memalloc.c ft_printf.c ft_strclr.c ft_strlen.c pftools.c speci_p.c
 LIB_OBJ	=	$(LIB_NAME:.c=.o)
 
 INC		=	$(addprefix $(INC_DIR)/, $(INC_NAME))
@@ -43,7 +45,7 @@ FLAGS	=	-Wall -Wextra -Werror
 all: $(NAMEPS)
 
 $(NAMEPS):
-	@gcc -c $(FLAGS) $(SRC_CHK)  $(LIB)
+	@gcc -c $(FLAGS) $(SRC_CHK) $(LIB)
 	@mv $(O_CHK) $(LIB_OBJ) $(OBJ_DIR)
 	@gcc $(OBJ_CHK) $(OBJLIB) -o $(NAMECHK)
 	@echo "\033[1;32mChecker is ready.\033[0m"

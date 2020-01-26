@@ -22,8 +22,7 @@ int		instruction(t_list **a, t_list **b)
 	while (get_next_line(0, &inst) == 1)
 	{
 		end = chooseop(inst, a, b);
-		//visu(a, b);
-		//write(1, "\n", 1);
+		visu(a, b);
 		if (end == 0)
 			return (0);
 		if (end == 2)
@@ -37,20 +36,14 @@ int		sorted(t_list **a, t_list **b)
 	int		i;
 	t_list	*current;
 
-	if (*b != NULL)
-	{
-		ft_printf("KO\n");
+	if (*b != NULL && ft_printf("KO\n"))
 		return (0);
-	}
 	current = *a;
 	i = 1;
-	while (current->next != *a)
+	while (current->next)
 	{
-		if (current->content >= current->next->content)
-		{
-			ft_printf("KO\n");
+		if (current->val >= current->next->val && ft_printf("KO\n"))
 			return (0);
-		}
 		current = current->next;
 	}
 	ft_printf("OK\n");

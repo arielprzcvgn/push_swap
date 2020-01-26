@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visu.c                                             :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariperez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/13 17:22:10 by ariperez          #+#    #+#             */
-/*   Updated: 2019/11/19 18:00:55 by ariperez         ###   ########.fr       */
+/*   Created: 2018/11/18 18:17:39 by ariperez          #+#    #+#             */
+/*   Updated: 2019/03/21 17:25:05 by ariperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/libftprintf.h"
 
-void	visu(t_list **a, t_list **b)
+void	ft_putchar(char c)
 {
-	t_list	*current;
-
-	ft_printf("Pile A |");
-	current = *a;
-	while (current)
-	{
-		ft_printf(" %i", current->val);
-		current = current->next;
-	}
-	ft_printf("\nPile B |");
-	current = *b;
-	while (current)
-	{
-		ft_printf(" %i", current->val);
-		current = current->next;
-	}
-	ft_printf("\n");
+	write(1, &c, 1);
 }

@@ -17,25 +17,23 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdarg.h>
-# include <stdio.h> //DEBUG
 
 # define BUFF_SIZE 500
 
 typedef struct		s_list
 {
-	int				content;
+	int				val;
 	struct s_list	*prev;
 	struct s_list	*next;
-	int				partition;
 }					t_list;
 
 /*
 **Initialisation (init.c)
 */
-t_list				*ps_lstnew(t_list **list, int content);
-int					ps_lstadd(t_list **list, int content);
-int					ps_atoi(const char *str, t_list **pilea);
-int					ps_init(int argc, char **argv, t_list **pilea);
+t_list				*ps_lstnew(t_list **list, int val);
+int					ps_lstadd(t_list **list, int val);
+int					ps_atoi(const char *str, t_list **a);
+int					ps_init(int argc, char **argv, t_list **a);
 
 /*
 **Possible operations (operation.c)
@@ -44,27 +42,27 @@ int					swap(t_list **list);
 int					push(t_list **listfrom, t_list **listto);
 int					rotate(t_list **list, int rev);
 int					notanop();
-int					chooseop(char *op, t_list **pilea, t_list **pileb);
+int					chooseop(char *op, t_list **a, t_list **b);
 
 /*
 **Visualisation (visu.c)
-*
-int					visu(t_list **pilea, t_list **pileb);
 */
+void				visu(t_list **a, t_list **b);
+
 /*
 **Sort (push_swap.c)
 *
-int					find_min(t_list **pilea);
-int					find_max(t_list **pilea);
-int					is_sorted(t_list **pilea, t_list **pileb);
-int					sorting(t_list **pilea, t_list **pileb);
+int					find_min(t_list **a);
+int					find_max(t_list **a);
+int					is_sorted(t_list **a, t_list **b);
+int					sorting(t_list **a, t_list **b);
 */
 /*
 **Sort Algorithm (bubble.c - quick.c)
 
-int					bubble(t_list **pilea, t_list **pileb);
-void				perso(t_list **pilea, t_list **pileb, int a);
-void				quick(t_list **pilea, t_list **pileb, t_list *part, int a);
+int					bubble(t_list **a, t_list **b);
+void				perso(t_list **a, t_list **b, int a);
+void				quick(t_list **a, t_list **b, t_list *part, int a);
 */
 
 /*

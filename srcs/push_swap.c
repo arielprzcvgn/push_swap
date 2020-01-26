@@ -12,73 +12,72 @@
 
 #include "../includes/push_swap.h"
 
-int		find_min(t_list **pilea)
+int		find_min(t_list **a)
 {
 	t_list	*current;
 	int		min;
 
-	min = (*pilea)->content;
-	current = (*pilea)->next;
-	while (current != *pilea)
+	min = (*a)->val;
+	current = (*a)->next;
+	while (current != *a)
 	{
-		if (current->content < min)
-			min = current->content;
+		if (current->val < min)
+			min = current->val;
 		current = current->next;
 	}
 	return (min);
 }
 
-int		find_max(t_list **pilea)
+int		find_max(t_list **a)
 {
 	t_list	*current;
 	int		max;
 
-	max = (*pilea)->content;
-	current = (*pilea)->next;
-	while (current != *pilea)
+	max = (*a)->val;
+	current = (*a)->next;
+	while (current != *a)
 	{
-		if (current->content > max)
-			max = current->content;
+		if (current->val > max)
+			max = current->val;
 		current = current->next;
 	}
 	return (max);
 }
 
-int		is_sorted(t_list **pilea, t_list **pileb)
+int		is_sorted(t_list **a, t_list **b)
 {
 	t_list	*current;
 
-	if (*pileb != NULL)
+	if (*b != NULL)
 		return (0);
-	current = *pilea;
-	while (current->next != *pilea)
+	current = *a;
+	while (current->next != *a)
 	{
-		if (current->content > current->next->content)
+		if (current->val > current->next->val)
 			return (0);
 		current = current->next;
 	}
 	return (1);
 }
 
-int		sorting(t_list **pilea, t_list **pileb)
+int		sorting(t_list **a, t_list **b)
 {
-	//perso(pilea, pileb, 1);
-	quick(pilea, pileb, (*pilea)->prev, 1);
-	//bubble(pilea, pileb);
+	*a = NULL;
+	*b = NULL;
 	return (1);
 }
 
 
 int		main(int argc, char **argv)
 {
-	t_list		*pilea;
-	t_list		*pileb;
+	t_list		*a;
+	t_list		*b;
 
-	pilea = NULL;
-	pileb = NULL;
+	a = NULL;
+	b = NULL;
 	if (argc == 1)
 		return (0);
-	if (ps_init(argc, argv, &pilea) == 0 || sorting(&pilea, &pileb) == 0)
+	if (ps_init(argc, argv, &a) == 0 || sorting(&a, &b) == 0)
 		return (-1);
 	return (1);
 }
