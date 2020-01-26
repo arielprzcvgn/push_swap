@@ -12,38 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-int		find_min(t_list **a)
-{
-	t_list	*current;
-	int		min;
-
-	min = (*a)->val;
-	current = (*a)->next;
-	while (current != *a)
-	{
-		if (current->val < min)
-			min = current->val;
-		current = current->next;
-	}
-	return (min);
-}
-
-int		find_max(t_list **a)
-{
-	t_list	*current;
-	int		max;
-
-	max = (*a)->val;
-	current = (*a)->next;
-	while (current != *a)
-	{
-		if (current->val > max)
-			max = current->val;
-		current = current->next;
-	}
-	return (max);
-}
-
 int		is_sorted(t_list **a, t_list **b)
 {
 	t_list	*current;
@@ -51,7 +19,7 @@ int		is_sorted(t_list **a, t_list **b)
 	if (*b != NULL)
 		return (0);
 	current = *a;
-	while (current->next != *a)
+	while (current->next)
 	{
 		if (current->val > current->next->val)
 			return (0);

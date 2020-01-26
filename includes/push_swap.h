@@ -51,18 +51,14 @@ void				visu(t_list **a, t_list **b);
 
 /*
 **Sort (push_swap.c)
-*
-int					find_min(t_list **a);
-int					find_max(t_list **a);
+*/
 int					is_sorted(t_list **a, t_list **b);
 int					sorting(t_list **a, t_list **b);
-*/
+
 /*
 **Sort Algorithm (bubble.c - quick.c)
 
 int					bubble(t_list **a, t_list **b);
-void				perso(t_list **a, t_list **b, int a);
-void				quick(t_list **a, t_list **b, t_list *part, int a);
 */
 
 /*
