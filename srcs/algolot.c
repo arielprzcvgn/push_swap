@@ -62,13 +62,17 @@ t_move	*nb_moves(t_list **a, t_list **b, t_list *to_move)
 	aprev = length(a, to_move, -1);
 	current = *b;
 	bnext = 0;
-	while (current && to_move->val < current->val &&
-			to_move->val > current->prev->val && (++bnext))
+	while (current && ((current->val > current->prev->val &&
+	to_move->val < current->val) || (current->val < current->prev->val &&
+	(to_move->val > current->prev->val || to_move->val < current->val))) &&
+	(++bnext))
 		current = current->next;
 	current = *b;
 	bprev = 0;
-	while (current && to_move->val < current->val &&
-			to_move->val > current->prev->val && (++bprev))
+	while (current && ((current->val > current->prev->val &&
+	to_move->val < current->val) || (current->val < current->prev->val &&
+	(to_move->val > current->prev->val || to_move->val < current->val))) &&
+	(++bprev))
 		current = current->prev;
 	return (procedure(anext, aprev, bnext, bprev));
 }
