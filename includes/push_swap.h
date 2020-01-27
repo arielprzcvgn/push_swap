@@ -20,12 +20,24 @@
 
 # define BUFF_SIZE 500
 
+# define MAX(a, b)		(a < b) ? b : a
+# define MIN(a, b)		(a > b) ? b : a
+
 typedef struct		s_list
 {
 	int				val;
 	struct s_list	*prev;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_move
+{
+	int				total;
+	int				move_a;
+	int				move_b;
+	int				sens_a;
+	int				sens_b;
+}					t_move;
 
 /*
 **Initialisation (init.c)
@@ -52,14 +64,15 @@ void				visu(t_list **a, t_list **b);
 /*
 **Sort (push_swap.c)
 */
+int					length(t_list **list, t_list *stop, int	way);
 int					is_sorted(t_list **a, t_list **b);
 int					sorting(t_list **a, t_list **b);
 
 /*
-**Sort Algorithm (bubble.c - quick.c)
-
-int					bubble(t_list **a, t_list **b);
+**Sort Algorithm (algolot.c)
 */
+int					algolot(t_list **a, t_list **b);
+
 
 /*
 **libft
