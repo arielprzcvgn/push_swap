@@ -19,6 +19,16 @@ t_move	*fill(int total, int move_a, int move_b, int sens_a, int sens_b)
 	ret = NULL;
 	if ((ret = malloc(sizeof(ret))) == NULL)
 		return (NULL);
+	if (!(ret->total = (int)malloc(sizeof(ret->total))))
+		return (NULL);
+	if (!(ret->move_a = (int)malloc(sizeof(ret->move_a))))
+		return (NULL);
+	if (!(ret->move_b = (int)malloc(sizeof(ret->move_b))))
+		return (NULL);
+	if (!(ret->sens_a = (int)malloc(sizeof(ret->sens_a))))
+		return (NULL);
+	if (!(ret->sens_b = (int)malloc(sizeof(ret->sens_b))))
+		return (NULL);
 	ret->total = total;
 	ret->move_a = move_a;
 	ret->move_b = move_b;
@@ -97,7 +107,6 @@ int		how_to_step(t_list **a, t_list **b, t_list *step)
 	}
 	push(a, b);
 	ft_printf("pb\n");
-	visu(a, b);
 	return (1);
 }
 

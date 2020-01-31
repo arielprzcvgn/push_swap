@@ -59,8 +59,5 @@ int		main(int argc, char **argv)
 		return (0);
 	if (ps_init(argc, argv, &a) == 0 || sorting(&a, &b) == 0)
 		return (-1);
-	visu(&a, &b);
-	if (is_sorted(&a, &b))
-		ft_printf("OK\n");
 	return (1);
 }
