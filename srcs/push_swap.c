@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-int		length(t_list **list, t_list *stop, int	way)
+int		length(t_list **list, t_list *stop, int way)
 {
 	t_list	*current;
 	int		len;
@@ -48,7 +48,6 @@ int		sorting(t_list **a, t_list **b)
 	return (1);
 }
 
-
 int		main(int argc, char **argv)
 {
 	t_list		*a;
@@ -60,29 +59,8 @@ int		main(int argc, char **argv)
 		return (0);
 	if (ps_init(argc, argv, &a) == 0 || sorting(&a, &b) == 0)
 		return (-1);
+	visu(&a, &b);
+	if (is_sorted(&a, &b))
+		ft_printf("OK\n");
 	return (1);
 }
-
-
-/*
-int		nb_moves(t_list **a, t_list **b, t_list *to_move)
-{
-	t_list	*current;
-	int		movea;
-	int		moveb;
-
-	movea = (length(a, to_move, 1) < length(a, to_move, -1)?
-			length(a, to_move, 1) : length(a, to_move, -1));
-	current = *b;
-	moveb = 0;
-	while (current && current->val > to_move->val && (++moveb))
-		current = current->next;
-	if (length(b, NULL, 1) - moveb < moveb)
-	{
-		current = *b;
-		moveb = 0;
-		while (current && current->val > to_move->val && (++moveb))
-			current = current->prev;
-	}
-	return (movea + moveb);
-}*/

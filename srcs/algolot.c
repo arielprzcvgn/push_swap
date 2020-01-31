@@ -16,6 +16,7 @@ t_move	*fill(int total, int move_a, int move_b, int sens_a, int sens_b)
 {
 	t_move	*ret;
 
+	ret = NULL;
 	if ((ret = malloc(sizeof(ret))) == NULL)
 		return (NULL);
 	ret->total = total;
@@ -33,20 +34,20 @@ t_move	*procedure(int anext, int aprev, int bnext, int bprev)
 	int		apbn;
 	int		abp;
 	int		abn;
-	
+
 	lemouv = NULL;
 	anbp = anext + bprev;
 	apbn = bnext + aprev;
 	abp = MAX(aprev, bprev);
 	abn = MAX(anext, bnext);
-	if (anbp <= apbn && anbp <= abp && anbp <= abn)
+	if (abn <= anbp && abn <= apbn && abn <= abp)
+		lemouv = fill(abn, anext, bnext, 1, 1);
+	else if (abp <= anbp && abp <= apbn && abp <= abn)
+		lemouv = fill(abp, aprev, bprev, -1, -1);
+	else if (anbp <= apbn && anbp <= abp && anbp <= abn)
 		lemouv = fill(anbp, anext, bprev, 1, -1);
 	else if (apbn <= anbp && apbn <= abp && apbn <= abn)
 		lemouv = fill(apbn, aprev, bnext, -1, 1);
-	else if (abp <= anbp && abp <= apbn && abp <= abn)
-		lemouv = fill(abp, aprev, bprev, -1, -1);
-	else if (abn <= anbp && abn <= apbn && abn <= abp)
-		lemouv = fill(abn, anext, bnext, 1, 1);
 	return (lemouv);
 }
 
@@ -58,20 +59,22 @@ t_move	*nb_moves(t_list **a, t_list **b, t_list *to_move)
 	int		bnext;
 	int		bprev;
 
-	anext =	length(a, to_move, 1);
+	anext = length(a, to_move, 1);
 	aprev = length(a, to_move, -1);
-	current = *b;
 	bnext = 0;
+	bprev = 0;
+	current = *b;
 	while (current && ((current->val > current->prev->val &&
-	to_move->val < current->val) || (current->val < current->prev->val &&
-	(to_move->val > current->prev->val || to_move->val < current->val))) &&
+	(current->prev->val < to_move->val && to_move->val < current->val)) ||
+	(current->val < current->prev->val &&
+	(to_move->val < current->val || current->prev->val < to_move->val))) &&
 	(++bnext))
 		current = current->next;
 	current = *b;
-	bprev = 0;
 	while (current && ((current->val > current->prev->val &&
-	to_move->val < current->val) || (current->val < current->prev->val &&
-	(to_move->val > current->prev->val || to_move->val < current->val))) &&
+	(current->prev->val < to_move->val && to_move->val < current->val)) ||
+	(current->val < current->prev->val &&
+	(to_move->val < current->val || current->prev->val < to_move->val))) &&
 	(++bprev))
 		current = current->prev;
 	return (procedure(anext, aprev, bnext, bprev));
@@ -80,7 +83,7 @@ t_move	*nb_moves(t_list **a, t_list **b, t_list *to_move)
 int		how_to_step(t_list **a, t_list **b, t_list *step)
 {
 	t_move	*lemouv;
-	
+
 	lemouv = nb_moves(a, b, step);
 	while (lemouv->move_a--)
 	{
@@ -94,6 +97,7 @@ int		how_to_step(t_list **a, t_list **b, t_list *step)
 	}
 	push(a, b);
 	ft_printf("pb\n");
+	visu(a, b);
 	return (1);
 }
 
@@ -119,6 +123,11 @@ int		algolot(t_list **a, t_list **b)
 		}
 		how_to_step(a, b, step);
 		return (algolot(a, b));
+	}
+	while ((*b)->val < (*b)->prev->val)
+	{
+		rotate(b, 1);
+		ft_printf("rb\n");
 	}
 	while (*b)
 	{

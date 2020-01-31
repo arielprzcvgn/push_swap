@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdarg.h>
+# include <stdio.h>
 
 # define BUFF_SIZE 500
 
@@ -72,7 +73,6 @@ int					sorting(t_list **a, t_list **b);
 **Sort Algorithm (algolot.c)
 */
 int					algolot(t_list **a, t_list **b);
-
 
 /*
 **libft

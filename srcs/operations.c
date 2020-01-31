@@ -60,13 +60,13 @@ int		rotate(t_list **list, int rev)
 {
 	if (*list && (*list)->next)
 	{
-		if (rev == 0)
+		if (rev == 1)
 		{
 			(*list)->prev->next = *list;
 			*list = (*list)->next;
 			(*list)->prev->next = NULL;
 		}
-		if (rev == 1)
+		if (rev == -1)
 		{
 			(*list)->prev->next = *list;
 			*list = (*list)->prev;
@@ -98,17 +98,17 @@ int		chooseop(char *op, t_list **a, t_list **b)
 	else if (ft_strcmp(op, "pb\n") == 0)
 		push(a, b);
 	else if (ft_strcmp(op, "ra\n") == 0)
-		rotate(a, 0);
-	else if (ft_strcmp(op, "rb\n") == 0)
-		rotate(b, 0);
-	else if (ft_strcmp(op, "rr\n") == 0 && (rotate(a, 0) || 1))
-		rotate(b, 0);
-	else if (ft_strcmp(op, "rra\n") == 0)
 		rotate(a, 1);
+	else if (ft_strcmp(op, "rb\n") == 0)
+		rotate(b, 1);
+	else if (ft_strcmp(op, "rr\n") == 0 && (rotate(a, 1) || 1))
+		rotate(b, 1);
+	else if (ft_strcmp(op, "rra\n") == 0)
+		rotate(a, -1);
 	else if (ft_strcmp(op, "rrb\n") == 0)
-		rotate(b, 1);
-	else if (ft_strcmp(op, "rrr\n") == 0 && (rotate(a, 1) || 1))
-		rotate(b, 1);
+		rotate(b, -1);
+	else if (ft_strcmp(op, "rrr\n") == 0 && (rotate(a, -1) || 1))
+		rotate(b, -1);
 	else
 		return (notanop(op));
 	return (1);
