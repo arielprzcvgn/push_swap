@@ -24,7 +24,7 @@ int		swap(t_list **list)
 		(*list)->next->val = swap;
 		return (1);
 	}
-	return (0);
+	return (1);
 }
 
 int		push(t_list **listfrom, t_list **listto)
@@ -32,7 +32,7 @@ int		push(t_list **listfrom, t_list **listto)
 	t_list		*topush;
 
 	if (*listfrom == NULL)
-		return (0);
+		return (1);
 	topush = *listfrom;
 	if ((*listfrom)->next)
 	{
@@ -74,73 +74,26 @@ int		rotate(t_list **list, int rev)
 		}
 		return (1);
 	}
-	return (0);
-}
-
-int		notanop(char *op)
-{
-	if (op[0] == '\n')
-		return (2);
-	ft_printf("Error operation\n");
-	return (0);
-}
-
-/*int		chooseop(char *op, t_list **a, t_list **b)
-{
-	if (ft_strcmp(op, "sa\n") == 0)
-		swap(a);
-	else if (ft_strcmp(op, "sb\n") == 0)
-		swap(b);
-	else if (ft_strcmp(op, "ss\n") == 0 && (swap(a) || 1))
-		swap(b);
-	else if (ft_strcmp(op, "pa\n") == 0)
-		push(b, a);
-	else if (ft_strcmp(op, "pb\n") == 0)
-		push(a, b);
-	else if (ft_strcmp(op, "ra\n") == 0)
-		rotate(a, 1);
-	else if (ft_strcmp(op, "rb\n") == 0)
-		rotate(b, 1);
-	else if (ft_strcmp(op, "rr\n") == 0 && (rotate(a, 1) || 1))
-		rotate(b, 1);
-	else if (ft_strcmp(op, "rra\n") == 0)
-		rotate(a, -1);
-	else if (ft_strcmp(op, "rrb\n") == 0)
-		rotate(b, -1);
-	else if (ft_strcmp(op, "rrr\n") == 0 && (rotate(a, -1) || 1))
-		rotate(b, -1);
-	else
-		return (notanop(op));
 	return (1);
 }
 
-int		notanop(char *op)
+int		chooseop(char *op, t_list **a, t_list **b, t_opt *o)
 {
-	
-	
-	return (0);
-}
-*/
-int		chooseop(char *op, t_list **a, t_list **b)
-{
-	if (((!ft_strcmp(op, "sa\n") || !ft_strcmp(op, "ss\n")) && swap(a)) ||
-	((!ft_strcmp(op, "sb\n") || !ft_strcmp(op, "ss\n")) && swap(b)))
-		;
-	else if (ft_strcmp(op, "pa\n") == 0)
-		push(b, a);
-	else if (ft_strcmp(op, "pb\n") == 0)
-		push(a, b);
-	else if (ft_strcmp(op, "ra\n") == 0 || ft_strcmp(op, "rr\n") == 0)
-		rotate(a, 1);
-	else if (ft_strcmp(op, "rb\n") == 0 || ft_strcmp(op, "rr\n") == 0)
-		rotate(b, 1);
-	else if (ft_strcmp(op, "rra\n") == 0 || ft_strcmp(op, "rrr\n") == 0)
-		rotate(a, -1);
-	else if (ft_strcmp(op, "rrb\n") == 0 || ft_strcmp(op, "rrr\n") == 0)
-		rotate(b, -1);
+	if ((!ft_strcmp(op, "sa\n") && swap(a)) ||
+	(!ft_strcmp(op, "sb\n") && swap(b)) ||
+	(!ft_strcmp(op, "ss\n") && swap(a) && swap(b)) ||
+	(!ft_strcmp(op, "ra\n") && rotate(a, 1)) ||
+	(!ft_strcmp(op, "rb\n") && rotate(b, 1)) ||
+	(!ft_strcmp(op, "rr\n") && rotate(a, 1) && rotate(b, 1)) ||
+	(!ft_strcmp(op, "rra\n") && rotate(a, -1)) ||
+	(!ft_strcmp(op, "rrb\n") && rotate(b, -1)) ||
+	(!ft_strcmp(op, "rrr\n") && rotate(a, -1) && rotate(b, -1)) ||
+	(!ft_strcmp(op, "pa\n") && push(b, a)) ||
+	(!ft_strcmp(op, "pb\n") && push(a, b)))
+		visu(a, b, o, op);
 	else if (op[0] == '\n')
 		return (2);
-	else
-		ft_printf("Error operation\n");
+	else if (ft_printf("Error operation\n"))
+		return (0);
 	return (1);
 }

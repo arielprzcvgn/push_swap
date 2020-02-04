@@ -17,17 +17,12 @@ t_move	*fill(int total, int move_a, int move_b, int sens)
 	t_move	*ret;
 
 	ret = NULL;
-	if ((ret = malloc(sizeof(ret))) == NULL)
-		return (NULL);
-	if (!(ret->total = (int)malloc(sizeof(ret->total))))
-		return (NULL);
-	if (!(ret->move_a = (int)malloc(sizeof(ret->move_a))))
-		return (NULL);
-	if (!(ret->move_b = (int)malloc(sizeof(ret->move_b))))
-		return (NULL);
-	if (!(ret->sens_a = (int)malloc(sizeof(ret->sens_a))))
-		return (NULL);
-	if (!(ret->sens_b = (int)malloc(sizeof(ret->sens_b))))
+	if (!(ret = malloc(sizeof(ret))) ||
+	!(ret->total = (int)malloc(sizeof(ret->total))) ||
+	!(ret->move_a = (int)malloc(sizeof(ret->move_a))) ||
+	!(ret->move_b = (int)malloc(sizeof(ret->move_b))) ||
+	!(ret->sens_a = (int)malloc(sizeof(ret->sens_a))) ||
+	!(ret->sens_b = (int)malloc(sizeof(ret->sens_b))))
 		return (NULL);
 	ret->total = total;
 	ret->move_a = move_a;

@@ -98,15 +98,9 @@ int		ps_init(int argc, char **argv, t_list **a, t_opt *o)
 	int		i;
 	t_list	*current;
 
-	i = 0;
-	if (o && (!(o->visu = (int)malloc(sizeof(o->visu))) || (o->visu = 0) ||
-	!(o->color = (int)malloc(sizeof(o->color))) || (o->color = 0) ||
-	!(o->len = (int)malloc(sizeof(o->color))) || (o->len = 10)))
-		return (0);
-	visu(a, a, o);
-	while (o && argv[++i][0] == '-')
-		options(argv[i], o);
-	visu(a, a, o);
+	i = 1;
+	while (o && argv[i][0] == '-')
+		options(argv[i++], o);
 	if (i == argc - 1 && !(i = 0))
 		argv = ft_strsplit(argv[argc - 1], ' ');
 	while (argv[i])

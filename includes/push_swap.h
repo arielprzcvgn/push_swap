@@ -59,12 +59,12 @@ int					swap(t_list **list);
 int					push(t_list **listfrom, t_list **listto);
 int					rotate(t_list **list, int rev);
 int					notanop();
-int					chooseop(char *op, t_list **a, t_list **b);
+int					chooseop(char *op, t_list **a, t_list **b, t_opt *o);
 
 /*
 **Visualisation (visu.c)
 */
-void				visu(t_list **a, t_list **b, t_opt *o);
+void				visu(t_list **a, t_list **b, t_opt *o, char *op);
 
 /*
 **Sort (push_swap.c)

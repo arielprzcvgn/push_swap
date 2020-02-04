@@ -19,20 +19,28 @@ void	print_pile(t_list **pile, int len)
 	current = *pile;
 	while (current && (len--))
 	{
-		ft_printf(" % 4i", current->val);
+		ft_printf("% 4i", current->val);
 		current = current->next;
 	}
 	while (len--)
-		ft_printf("    ");
+		ft_printf("   ");
+	ft_printf("\n");
 }
 
-void	visu(t_list **a, t_list **b, t_opt *o)
+void	visu(t_list **a, t_list **b, t_opt *o, char *op)
 {
 	if (o->visu)
-		;
-	ft_printf("Pile A |");
-	print_pile(a, o->len);
-	ft_printf("\nPile B |");
-	print_pile(b, o->len);
-	ft_printf("\n");
+	{
+		ft_printf("Pile A |");
+		print_pile(a, o->len);
+		ft_printf("Pile B |");
+		print_pile(b, o->len);
+	}
+	else if (o->color && !ft_strcmp(op, "pb\n"))
+	{
+		ft_printf("Pile A |");
+		print_pile(a, o->len);
+		ft_printf("Pile B |");
+		print_pile(b, o->len);
+	}
 }

@@ -157,7 +157,7 @@ while [ ${LOOPS} -gt 0 ]; do
             ((OKCOUNT++));
         fi
     elif [ ${NUMBERS} -eq 500 ]; then
-        if [ ${OPER} -gt 5300 ]; then
+        if [ ${OPER} -gt 5500 ]; then
             echo "operations: ${OPER} \n"${A}"\n" >> ${ERRORS}
             echo ${RED}"WRONG${CLN} \c";
             ((WRONGCOUNT++));

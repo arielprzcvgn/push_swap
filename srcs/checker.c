@@ -25,17 +25,13 @@ int		instruction(t_list **a, t_list **b, t_opt *o)
 	inst = ft_strnew(5);
 	while (get_next_line(0, &inst) == 1)
 	{
-		end = chooseop(inst, a, b);
-		if (o->visu || o->color)
-			visu(a, b, o);
+		end = chooseop(inst, a, b, o);
 		if (end == 0)
 			return (0);
 		if (end == 2)
 			break;
 	}
 	free(inst);
-	ft_printf("\n----------FINAL STATE----------\n");
-	visu(a, b, o);
 	return (1);
 }
 
@@ -69,12 +65,12 @@ int		main(int argc, char **argv)
 	o = NULL;
 	if (argc == 1)
 		return (0);
-	if (!(o = malloc(sizeof(t_opt))) || ps_init(argc, argv, &a, o) == 0 ||
-	instruction(&a, &b, o) == 0)
+	if (!(o = malloc(sizeof(t_opt))) ||
+	!(o->visu = (int)malloc(sizeof(o->visu))) || (o->visu = 0) ||
+	!(o->color = (int)malloc(sizeof(o->color))) || (o->color = 0) ||
+	!(o->len = (int)malloc(sizeof(o->color))) || (o->len = 0) ||
+	ps_init(argc, argv, &a, o) == 0 || instruction(&a, &b, o) == 0)
 		return (-1);
 	sorted(&a, &b);
-	free(a);
-	free(b);
-	free(o);
 	return (1);
 }
