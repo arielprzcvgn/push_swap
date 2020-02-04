@@ -44,10 +44,10 @@ int		is_sorted(t_list **a, t_list **b)
 
 int		sorting(t_list **a, t_list **b)
 {
-	//if (length(a, NULL, 1) <= 5)
-	//	highlgofive(a, b);
-	//else
-	algolot(a, b);
+	if (length(a, NULL, 1) <= 5)
+		highlgofive(a, b);
+	else
+		algolot(a, b);
 	return (1);
 }
 

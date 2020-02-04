@@ -58,7 +58,6 @@ int					ps_init(int argc, char **argv, t_list **a, t_opt *o);
 int					swap(t_list **list);
 int					push(t_list **listfrom, t_list **listto);
 int					rotate(t_list **list, int rev);
-int					notanop();
 int					chooseop(char *op, t_list **a, t_list **b, t_opt *o);
 
 /*

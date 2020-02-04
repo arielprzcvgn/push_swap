@@ -24,7 +24,7 @@ int		swap(t_list **list)
 		(*list)->next->val = swap;
 		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int		push(t_list **listfrom, t_list **listto)
@@ -32,7 +32,7 @@ int		push(t_list **listfrom, t_list **listto)
 	t_list		*topush;
 
 	if (*listfrom == NULL)
-		return (1);
+		return (0);
 	topush = *listfrom;
 	if ((*listfrom)->next)
 	{
@@ -74,7 +74,7 @@ int		rotate(t_list **list, int rev)
 		}
 		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int		chooseop(char *op, t_list **a, t_list **b, t_opt *o)
