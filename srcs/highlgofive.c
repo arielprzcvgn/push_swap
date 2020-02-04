@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visu.c                                             :+:      :+:    :+:   */
+/*   highlgofive.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ariperez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,27 +12,9 @@
 
 #include "../includes/push_swap.h"
 
-void	print_pile(t_list **pile, int len)
+int		highlgofive(t_list **a, t_list **b)
 {
-	t_list	*current;
-
-	current = *pile;
-	while (current && (len--))
-	{
-		ft_printf(" % 4i", current->val);
-		current = current->next;
-	}
-	while (len--)
-		ft_printf("    ");
-}
-
-void	visu(t_list **a, t_list **b, t_opt *o)
-{
-	if (o->visu)
-		;
-	ft_printf("Pile A |");
-	print_pile(a, o->len);
-	ft_printf("\nPile B |");
-	print_pile(b, o->len);
-	ft_printf("\n");
+    a = NULL;
+    b = NULL;
+    return (1);
 }

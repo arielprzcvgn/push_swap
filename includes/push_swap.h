@@ -17,12 +17,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdarg.h>
-# include <stdio.h>
 
 # define BUFF_SIZE 500
-
-# define MAX(a, b)		(a < b) ? b : a
-# define MIN(a, b)		(a > b) ? b : a
 
 typedef struct		s_list
 {
@@ -40,13 +36,21 @@ typedef struct		s_move
 	int				sens_b;
 }					t_move;
 
+typedef struct		s_opt
+{
+	int				visu;
+	int				color;
+	int				len;
+}					t_opt;
+
+
 /*
 **Initialisation (init.c)
 */
 t_list				*ps_lstnew(t_list **list, int val);
 int					ps_lstadd(t_list **list, int val);
 int					ps_atoi(const char *str, t_list **a);
-int					ps_init(int argc, char **argv, t_list **a);
+int					ps_init(int argc, char **argv, t_list **a, t_opt *o);
 
 /*
 **Possible operations (operation.c)
@@ -60,7 +64,7 @@ int					chooseop(char *op, t_list **a, t_list **b);
 /*
 **Visualisation (visu.c)
 */
-void				visu(t_list **a, t_list **b);
+void				visu(t_list **a, t_list **b, t_opt *o);
 
 /*
 **Sort (push_swap.c)
@@ -73,6 +77,7 @@ int					sorting(t_list **a, t_list **b);
 **Sort Algorithm (algolot.c)
 */
 int					algolot(t_list **a, t_list **b);
+int					highlgofive(t_list **a, t_list **b);
 
 /*
 **libft

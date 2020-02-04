@@ -85,7 +85,7 @@ int		notanop(char *op)
 	return (0);
 }
 
-int		chooseop(char *op, t_list **a, t_list **b)
+/*int		chooseop(char *op, t_list **a, t_list **b)
 {
 	if (ft_strcmp(op, "sa\n") == 0)
 		swap(a);
@@ -111,5 +111,36 @@ int		chooseop(char *op, t_list **a, t_list **b)
 		rotate(b, -1);
 	else
 		return (notanop(op));
+	return (1);
+}
+
+int		notanop(char *op)
+{
+	
+	
+	return (0);
+}
+*/
+int		chooseop(char *op, t_list **a, t_list **b)
+{
+	if (((!ft_strcmp(op, "sa\n") || !ft_strcmp(op, "ss\n")) && swap(a)) ||
+	((!ft_strcmp(op, "sb\n") || !ft_strcmp(op, "ss\n")) && swap(b)))
+		;
+	else if (ft_strcmp(op, "pa\n") == 0)
+		push(b, a);
+	else if (ft_strcmp(op, "pb\n") == 0)
+		push(a, b);
+	else if (ft_strcmp(op, "ra\n") == 0 || ft_strcmp(op, "rr\n") == 0)
+		rotate(a, 1);
+	else if (ft_strcmp(op, "rb\n") == 0 || ft_strcmp(op, "rr\n") == 0)
+		rotate(b, 1);
+	else if (ft_strcmp(op, "rra\n") == 0 || ft_strcmp(op, "rrr\n") == 0)
+		rotate(a, -1);
+	else if (ft_strcmp(op, "rrb\n") == 0 || ft_strcmp(op, "rrr\n") == 0)
+		rotate(b, -1);
+	else if (op[0] == '\n')
+		return (2);
+	else
+		ft_printf("Error operation\n");
 	return (1);
 }

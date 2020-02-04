@@ -76,21 +76,45 @@ int		ps_atoi(const char *str, t_list **a)
 	return (ps_lstadd(a, nbr));
 }
 
-int		ps_init(int argc, char **argv, t_list **a)
+int		options(char *opt, t_opt *o)
+{
+	int		i;
+
+	i = 0;
+	while(opt[++i])
+	{
+		if (opt[i] == 'c')
+			o->color = 1;
+		else if (opt[i] == 'v')
+			o->visu = 1;
+		else
+			ft_printf("Unknown option. Ignored.\n");
+	}
+	return (1);
+}
+
+int		ps_init(int argc, char **argv, t_list **a, t_opt *o)
 {
 	int		i;
 	t_list	*current;
 
 	i = 0;
-	if (argc == 2 && (i = -1))
-		argv = ft_strsplit(argv[1], ' ');
-	while (argv[++i])
+	if (o && (!(o->visu = (int)malloc(sizeof(o->visu))) || (o->visu = 0) ||
+	!(o->color = (int)malloc(sizeof(o->color))) || (o->color = 0) ||
+	!(o->len = (int)malloc(sizeof(o->color))) || (o->len = 10)))
+		return (0);
+	visu(a, a, o);
+	while (o && argv[++i][0] == '-')
+		options(argv[i], o);
+	visu(a, a, o);
+	if (i == argc - 1 && !(i = 0))
+		argv = ft_strsplit(argv[argc - 1], ' ');
+	while (argv[i])
 	{
-		if (!*argv[i] || ps_atoi(argv[i], a) == 0)
-		{
-			ft_printf("Error atoi\n");
+		if ((!*argv[i] || ps_atoi(argv[i], a) == 0) &&
+		ft_printf("Error atoi\n"))
 			return (0);
-		}
+		i++;
 	}
 	current = *a;
 	while (current->next)

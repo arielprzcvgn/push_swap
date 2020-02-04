@@ -12,22 +12,30 @@
 
 #include "../includes/push_swap.h"
 
-int		instruction(t_list **a, t_list **b)
+int		instruction(t_list **a, t_list **b, t_opt *o)
 {
 	char	*inst;
 	int		end;
+	t_list	*current;
 
+	current = *a;
+	while (current && (++o->len))
+		current = current->next;
 	end = 0;
 	inst = ft_strnew(5);
 	while (get_next_line(0, &inst) == 1)
 	{
 		end = chooseop(inst, a, b);
-		//visu(a, b);
+		if (o->visu || o->color)
+			visu(a, b, o);
 		if (end == 0)
 			return (0);
 		if (end == 2)
-			return (1);
+			break;
 	}
+	free(inst);
+	ft_printf("\n----------FINAL STATE----------\n");
+	visu(a, b, o);
 	return (1);
 }
 
@@ -54,12 +62,19 @@ int		main(int argc, char **argv)
 {
 	t_list	*a;
 	t_list	*b;
+	t_opt	*o;
 
 	a = NULL;
 	b = NULL;
+	o = NULL;
 	if (argc == 1)
 		return (0);
-	if (ps_init(argc, argv, &a) == 0 || instruction(&a, &b) == 0)
+	if (!(o = malloc(sizeof(t_opt))) || ps_init(argc, argv, &a, o) == 0 ||
+	instruction(&a, &b, o) == 0)
 		return (-1);
-	return (sorted(&a, &b));
+	sorted(&a, &b);
+	free(a);
+	free(b);
+	free(o);
+	return (1);
 }
