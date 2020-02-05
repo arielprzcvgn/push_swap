@@ -79,17 +79,17 @@ int		rotate(t_list **list, int rev)
 
 int		chooseop(char *op, t_list **a, t_list **b, t_opt *o)
 {
-	if ((!ft_strcmp(op, "sa\n") && swap(a)) ||
-	(!ft_strcmp(op, "sb\n") && swap(b)) ||
-	(!ft_strcmp(op, "ss\n") && swap(a) && swap(b)) ||
-	(!ft_strcmp(op, "ra\n") && rotate(a, 1)) ||
-	(!ft_strcmp(op, "rb\n") && rotate(b, 1)) ||
-	(!ft_strcmp(op, "rr\n") && rotate(a, 1) && rotate(b, 1)) ||
-	(!ft_strcmp(op, "rra\n") && rotate(a, -1)) ||
-	(!ft_strcmp(op, "rrb\n") && rotate(b, -1)) ||
-	(!ft_strcmp(op, "rrr\n") && rotate(a, -1) && rotate(b, -1)) ||
-	(!ft_strcmp(op, "pa\n") && push(b, a)) ||
-	(!ft_strcmp(op, "pb\n") && push(a, b)))
+	if ((!ft_strcmp(op, "sa\n") && (swap(a) || 1)) ||
+	(!ft_strcmp(op, "sb\n") && (swap(b) || 1)) ||
+	(!ft_strcmp(op, "ss\n") && (swap(a) || 1) && (swap(b) || 1)) ||
+	(!ft_strcmp(op, "ra\n") && (rotate(a, 1) || 1)) ||
+	(!ft_strcmp(op, "rb\n") && (rotate(b, 1) || 1)) ||
+	(!ft_strcmp(op, "rr\n") && (rotate(a, 1) || 1) && (rotate(b, 1) || 1)) ||
+	(!ft_strcmp(op, "rra\n") && (rotate(a, -1) || 1)) ||
+	(!ft_strcmp(op, "rrb\n") && (rotate(b, -1) || 1)) ||
+	(!ft_strcmp(op, "rrr\n") && (rotate(a, -1) || 1) && (rotate(b, -1) || 1)) ||
+	(!ft_strcmp(op, "pa\n") && (push(b, a) || 1)) ||
+	(!ft_strcmp(op, "pb\n") && (push(a, b) || 1)))
 		visu(a, b, o, op);
 	else if (op[0] == '\n')
 		return (2);
