@@ -93,7 +93,10 @@ int		chooseop(char *op, t_list **a, t_list **b, t_opt *o)
 		visu(a, b, o, op);
 	else if (op[0] == '\n')
 		return (2);
-	else if (ft_printf("Error operation\n"))
-		return (0);
+	else
+	{
+		free(op);
+		return (free_deb_hug(a, b, o, 4));
+	}
 	return (1);
 }

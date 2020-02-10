@@ -35,15 +35,13 @@ int		instruction(t_list **a, t_list **b, t_opt *o)
 	return (1);
 }
 
-int		sorted(t_list **a, t_list **b)
+int		checker(t_list **a, t_list **b)
 {
-	int		i;
 	t_list	*current;
 
 	if (*b != NULL && ft_printf("KO\n"))
 		return (0);
 	current = *a;
-	i = 1;
 	while (current->next)
 	{
 		if (current->val >= current->next->val && ft_printf("KO\n"))
@@ -62,15 +60,15 @@ int		main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	o = NULL;
 	if (argc == 1)
 		return (0);
 	if (!(o = malloc(sizeof(t_opt))) ||
-	!(o->visu = (int)malloc(sizeof(o->visu))) || (o->visu = 0) ||
-	!(o->color = (int)malloc(sizeof(o->color))) || (o->color = 0) ||
-	!(o->len = (int)malloc(sizeof(o->color))) || (o->len = 0) ||
-	ps_init(argc, argv, &a, o) == 0 || instruction(&a, &b, o) == 0)
+	(o->visu = 0) || (o->color = 0) || (o->debug = 0) || (o->len = 0) ||
+	!ps_init(argc, argv, &a, o) || !instruction(&a, &b, o))
 		return (-1);
-	sorted(&a, &b);
+	checker(&a, &b);
+	free_deb_hug(&a, &b, o, 0);
+	while (1)
+		;
 	return (1);
 }

@@ -17,12 +17,7 @@ t_move	*fill(int total, int move_a, int move_b, int sens)
 	t_move	*ret;
 
 	ret = NULL;
-	if (!(ret = malloc(sizeof(ret))) ||
-	!(ret->total = (int)malloc(sizeof(ret->total))) ||
-	!(ret->move_a = (int)malloc(sizeof(ret->move_a))) ||
-	!(ret->move_b = (int)malloc(sizeof(ret->move_b))) ||
-	!(ret->sens_a = (int)malloc(sizeof(ret->sens_a))) ||
-	!(ret->sens_b = (int)malloc(sizeof(ret->sens_b))))
+	if (!(ret = malloc(sizeof(t_move))))
 		return (NULL);
 	ret->total = total;
 	ret->move_a = move_a;
@@ -32,28 +27,26 @@ t_move	*fill(int total, int move_a, int move_b, int sens)
 	return (ret);
 }
 
-t_move	*procedure(int anext, int aprev, int bnext, int bprev)
+t_move	*optimove(int anext, int aprev, int bnext, int bprev)
 {
-	t_move	*m;
 	int		anbp;
 	int		apbn;
 	int		abp;
 	int		abn;
 
-	m = NULL;
 	anbp = anext + bprev;
 	apbn = bnext + aprev;
 	abp = aprev < bprev ? bprev : aprev;
 	abn = anext < bnext ? bnext : anext;
 	if (abn <= anbp && abn <= apbn && abn <= abp)
-		m = fill(abn, anext, bnext, 11);
+		return (fill(abn, anext, bnext, 11));
 	else if (abp <= anbp && abp <= apbn && abp <= abn)
-		m = fill(abp, aprev, bprev, 0);
+		return (fill(abp, aprev, bprev, 0));
 	else if (anbp <= apbn && anbp <= abp && anbp <= abn)
-		m = fill(anbp, anext, bprev, 10);
+		return (fill(anbp, anext, bprev, 10));
 	else if (apbn <= anbp && apbn <= abp && apbn <= abn)
-		m = fill(apbn, aprev, bnext, 1);
-	return (m);
+		return (fill(apbn, aprev, bnext, 1));
+	return (NULL);
 }
 
 t_move	*nb_moves(t_list **a, t_list **b, t_list *to_move)
@@ -82,14 +75,15 @@ t_move	*nb_moves(t_list **a, t_list **b, t_list *to_move)
 	(to_move->val < current->val || current->prev->val < to_move->val))) &&
 	(++bprev))
 		current = current->prev;
-	return (procedure(anext, aprev, bnext, bprev));
+	return (optimove(anext, aprev, bnext, bprev));
 }
 
 int		how_to_step(t_list **a, t_list **b, t_list *step)
 {
 	t_move	*m;
 
-	m = nb_moves(a, b, step);
+	if (!(m = nb_moves(a, b, step)))
+		return (free_deb_hug(a, b, NULL, 1));
 	while (m->sens_a == m->sens_b && m->move_a && m->move_b)
 	{
 		m->move_a--;
@@ -104,7 +98,8 @@ int		how_to_step(t_list **a, t_list **b, t_list *step)
 		rotate(b, m->sens_b);
 	push(a, b);
 	ft_printf("pb\n");
-	free(m);
+	if (m)
+		free(m);
 	return (1);
 }
 
@@ -115,22 +110,21 @@ int		algolot(t_list **a, t_list **b)
 	t_move	*m;
 	int		minimove;
 	
-	if (*a)
+	while (*a)
 	{
 		current = *a;
-		m = nb_moves(a, b, current);
-		minimove = m->total;
-		step = current;
+		minimove = -1;
 		while (current)
 		{
-			m = nb_moves(a, b, current);
-			if (m->total < minimove && (step = current))
+			if (!(m = nb_moves(a, b, current)))
+				return (free_deb_hug(a, b, NULL, 1));
+			if ((m->total < minimove || minimove == -1) && (step = current))
 				minimove = m->total;
+			free(m);
 			current = current->next;
 		}
-		free(m);
-		how_to_step(a, b, step);
-		return (algolot(a, b));
+		if (!(how_to_step(a, b, step)))
+			return (free_deb_hug(a, b, NULL, 1));
 	}
 	while ((*b)->val < (*b)->prev->val && ft_printf("rb\n"))
 		rotate(b, 1);

@@ -16,10 +16,7 @@ t_list	*ps_lstnew(t_list **list, int val)
 {
 	t_list	*new;
 
-	new = NULL;
 	if (!(new = malloc(sizeof(t_list))))
-		return (NULL);
-	if (!(new->val = (int)malloc(sizeof(val))))
 		return (NULL);
 	new->val = val;
 	new->prev = NULL;
@@ -34,12 +31,12 @@ int		ps_lstadd(t_list **list, int val)
 	t_list	*new;
 	t_list	*current;
 
-	if ((new = ps_lstnew(list, val)) == NULL)
+	if (!(new = ps_lstnew(list, val)))
 		return (0);
 	current = *list;
 	while (current)
 	{
-		if (current->val == val && ft_printf("Duplicate\n"))
+		if (current->val == val)
 			return (0);
 		new->prev = current;
 		current = current->next;
@@ -67,9 +64,8 @@ int		ps_atoi(const char *str, t_list **a)
 		i++;
 	}
 	nbr = neg * farfromint;
-	if (((str[i] && (str[i] < '0' || '9' < str[i])) ||
-		(nbr != neg * farfromint || ft_strlen(str) > 12)) &&
-		ft_printf("Invalid argument\n"))
+	if ((str[i] && (str[i] < '0' || '9' < str[i])) ||
+		nbr != neg * farfromint || ft_strlen(str) > 12)
 		return (0);
 	if (*a == NULL)
 		return (ps_lstnew(a, nbr) ? 1 : 0);
@@ -87,6 +83,8 @@ int		options(char *opt, t_opt *o)
 			o->color = 1;
 		else if (opt[i] == 'v')
 			o->visu = 1;
+		else if (opt[i] == 'd')
+			o->debug = 1;
 		else
 			ft_printf("Unknown option. Ignored.\n");
 	}
@@ -105,9 +103,8 @@ int		ps_init(int argc, char **argv, t_list **a, t_opt *o)
 		argv = ft_strsplit(argv[argc - 1], ' ');
 	while (argv[i])
 	{
-		if ((!*argv[i] || ps_atoi(argv[i], a) == 0) &&
-		ft_printf("Error atoi\n"))
-			return (0);
+		if (!ps_atoi(argv[i], a))
+			return (free_deb_hug(a, NULL, o, 2));
 		i++;
 	}
 	current = *a;

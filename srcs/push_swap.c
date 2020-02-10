@@ -44,11 +44,12 @@ int		is_sorted(t_list **a, t_list **b)
 
 int		sorting(t_list **a, t_list **b)
 {
-	if (length(a, NULL, 1) <= 5)
-		highlgofive(a, b);
+	if (is_sorted(a, b))
+		return (1);
+	else if (length(a, NULL, 1) <= 5)
+		return (highlgofive(a, b));
 	else
-		algolot(a, b);
-	return (1);
+		return (algolot(a, b));
 }
 
 int		main(int argc, char **argv)
@@ -60,7 +61,10 @@ int		main(int argc, char **argv)
 	b = NULL;
 	if (argc == 1)
 		return (0);
-	if (ps_init(argc, argv, &a, NULL) == 0 || sorting(&a, &b) == 0)
+	if (!ps_init(argc, argv, &a, NULL) || !sorting(&a, &b))
 		return (-1);
+	free_deb_hug(&a, &b, NULL, 0);
+	while (1)
+		;
 	return (1);
 }

@@ -24,7 +24,7 @@ char    **bf(t_list **a, t_list **b, int out, char **inst)
 		*inst = ft_strjoinfree("sb\n", *inst, 0, 1);
 	else if (swap(a) && (swap(b) || !swap(a)) && (bf(a, b, out - 1, inst) ||
 			!swap(a) || !swap(b)))
-		*inst = ft_strjoinfree("sb\n", *inst, 0, 1);
+		*inst = ft_strjoinfree("ss\n", *inst, 0, 1);
 	else if (rotate(a, 1) && (bf(a, b, out - 1, inst) || !rotate(a, -1)))
 		*inst = ft_strjoinfree("ra\n", *inst, 0, 1);
 	else if (rotate(b, 1) && (bf(a, b, out - 1, inst) || !rotate(b, -1)))
@@ -65,5 +65,5 @@ int		highlgofive(t_list **a, t_list **b)
 		out++;
 	}
 	free(inst);
-	return (1);
+	return (out <= 12 ? 1 : 0);
 }

@@ -40,6 +40,7 @@ typedef struct		s_opt
 {
 	int				visu;
 	int				color;
+	int				debug;
 	int				len;
 }					t_opt;
 
@@ -77,6 +78,11 @@ int					sorting(t_list **a, t_list **b);
 */
 int					algolot(t_list **a, t_list **b);
 int					highlgofive(t_list **a, t_list **b);
+
+/*
+**Free functions (ps_free.c)
+*/
+int					free_deb_hug(t_list **a, t_list **b, t_opt *o, int debug);
 
 /*
 **libft
