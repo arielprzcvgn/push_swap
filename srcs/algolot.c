@@ -109,7 +109,7 @@ int		algolot(t_list **a, t_list **b)
 	t_list	*step;
 	t_move	*m;
 	int		minimove;
-	
+
 	while (*a)
 	{
 		current = *a;

@@ -12,7 +12,7 @@
 
 #include "../includes/get_next_line.h"
 
-t_fd	*fd_choice(int fd, t_fd *file, char *buf)
+t_fd	*fd_choice(int fd, t_fd *file)
 {
 	t_fd	*begin;
 
@@ -22,9 +22,9 @@ t_fd	*fd_choice(int fd, t_fd *file, char *buf)
 		file = file->next;
 		if (file == begin)
 		{
-			if (!(file = malloc(sizeof(t_fd))))
+			if (!(file = malloc(sizeof(t_fd))) ||
+				!(file->buf = ft_strnew(BUFF_SIZE)))
 				return (NULL);
-			file->buf = buf;
 			file->fd = (size_t)fd;
 			file->red = 0;
 			file->next = begin->next;
@@ -66,26 +66,20 @@ int		get_next_line(const int fd, char **line)
 	static t_fd		*file;
 	char			*copy;
 	int				ret;
-	char			*buf;
 
-	ret = -1;
-	if (!(buf = ft_strnew(BUFF_SIZE + 1)))
-		return (ret);
 	if (!file)
 	{
-		if (!(file = malloc(sizeof(t_fd))))
-			return (ret);
-		file->buf = buf;
+		if (!(file = malloc(sizeof(t_fd))) ||
+			!(file->buf = ft_strnew(BUFF_SIZE)))
+			return (-1);
 		file->fd = (size_t)fd;
 		file->red = 0;
 		file->next = file;
 	}
 	if (fd < 0 || !(copy = ft_strnew(1)) || read(fd, copy, 0) == -1 ||
-			BUFF_SIZE < 0 || !line || !(file = fd_choice(fd, file, buf)))
-		return (ret);
-	ret = readline((int)file->fd, file->buf, &file->red, &copy);
-	if (!(*line = ft_strdup(copy)))
+			BUFF_SIZE < 0 || !line || !(file = fd_choice(fd, file)))
 		return (-1);
-	free(copy);
+	ret = readline((int)file->fd, file->buf, &file->red, &copy);
+	*line = copy;
 	return (ret);
 }

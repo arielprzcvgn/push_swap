@@ -14,7 +14,7 @@
 
 int		instruction(t_list **a, t_list **b, t_opt *o)
 {
-	char	*inst;
+	char	**inst;
 	int		end;
 	t_list	*current;
 
@@ -22,14 +22,17 @@ int		instruction(t_list **a, t_list **b, t_opt *o)
 	while (current && (++o->len))
 		current = current->next;
 	end = 0;
-	inst = ft_strnew(5);
-	while (get_next_line(0, &inst) == 1)
+	if (!(inst = malloc(sizeof(char*))))
+		return (free_deb_hug(a, b, o, 0));
+	while (get_next_line(0, inst) == 1)
 	{
-		end = chooseop(inst, a, b, o);
+		end = chooseop(*inst, a, b, o);
+		if (*inst)
+			free(*inst);
 		if (end == 0)
 			return (0);
 		if (end == 2)
-			break;
+			break ;
 	}
 	free(inst);
 	return (1);
@@ -63,12 +66,13 @@ int		main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	if (!(o = malloc(sizeof(t_opt))) ||
-	(o->visu = 0) || (o->color = 0) || (o->debug = 0) || (o->len = 0) ||
+	(o->visu = 0) ||
+	(o->color = 0) ||
+	(o->debug = 0) ||
+	(o->len = 0) ||
 	!ps_init(argc, argv, &a, o) || !instruction(&a, &b, o))
 		return (-1);
 	checker(&a, &b);
 	free_deb_hug(&a, &b, o, 0);
-	while (1)
-		;
 	return (1);
 }

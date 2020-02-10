@@ -26,7 +26,7 @@ int		free_list(t_list **list)
 	return (1);
 }
 
-int     free_deb_hug(t_list **a, t_list **b, t_opt *o, int error)
+int		free_deb_hug(t_list **a, t_list **b, t_opt *o, int error)
 {
 	if (error)
 		write(2, "Error\n", 6);

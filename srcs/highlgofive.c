@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-char    **bf(t_list **a, t_list **b, int out, char **inst)
+char	**bf(t_list **a, t_list **b, int out, char **inst)
 {
 	if (is_sorted(a, b))
 		return (inst);
@@ -22,8 +22,8 @@ char    **bf(t_list **a, t_list **b, int out, char **inst)
 		*inst = ft_strjoinfree("sa\n", *inst, 0, 1);
 	else if (swap(b) && (bf(a, b, out - 1, inst) || !swap(b)))
 		*inst = ft_strjoinfree("sb\n", *inst, 0, 1);
-	else if (swap(a) && (swap(b) || !swap(a)) && (bf(a, b, out - 1, inst) ||
-			!swap(a) || !swap(b)))
+	else if (swap(a) && (swap(b) || !swap(a)) &&
+	(bf(a, b, out - 1, inst) || !swap(a) || !swap(b)))
 		*inst = ft_strjoinfree("ss\n", *inst, 0, 1);
 	else if (rotate(a, 1) && (bf(a, b, out - 1, inst) || !rotate(a, -1)))
 		*inst = ft_strjoinfree("ra\n", *inst, 0, 1);
@@ -36,8 +36,8 @@ char    **bf(t_list **a, t_list **b, int out, char **inst)
 		*inst = ft_strjoinfree("rra\n", *inst, 0, 1);
 	else if (rotate(a, -1) && (bf(a, b, out - 1, inst) || !rotate(a, 1)))
 		*inst = ft_strjoinfree("rrb\n", *inst, 0, 1);
-	else if (rotate(a, -1) && (rotate(b, -1) || !rotate(a, 1)) && (bf(a, b, out - 1, inst) ||
-			!rotate(a, 1) || !rotate(b, 1)))
+	else if (rotate(a, -1) && (rotate(b, -1) || !rotate(a, 1)) &&
+	(bf(a, b, out - 1, inst) || !rotate(a, 1) || !rotate(b, 1)))
 		*inst = ft_strjoinfree("rrr\n", *inst, 0, 1);
 	else if (push(b, a) && (bf(a, b, out - 1, inst) || !push(a, b)))
 		*inst = ft_strjoinfree("pa\n", *inst, 0, 1);
@@ -45,13 +45,13 @@ char    **bf(t_list **a, t_list **b, int out, char **inst)
 		*inst = ft_strjoinfree("pb\n", *inst, 0, 1);
 	if (is_sorted(a, b))
 		return (inst);
-	return(NULL);
+	return (NULL);
 }
 
 int		highlgofive(t_list **a, t_list **b)
 {
-	int     out;
-	char    *inst;
+	int		out;
+	char	*inst;
 
 	out = 0;
 	inst = ft_strnew(0);
@@ -60,7 +60,7 @@ int		highlgofive(t_list **a, t_list **b)
 		if (bf(a, b, out, &inst))
 		{
 			ft_printf("%s", inst);
-			break;
+			break ;
 		}
 		out++;
 	}

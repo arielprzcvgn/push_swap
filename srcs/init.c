@@ -77,7 +77,7 @@ int		options(char *opt, t_opt *o)
 	int		i;
 
 	i = 0;
-	while(opt[++i])
+	while (opt[++i])
 	{
 		if (opt[i] == 'c')
 			o->color = 1;

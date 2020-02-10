@@ -44,7 +44,6 @@ typedef struct		s_opt
 	int				len;
 }					t_opt;
 
-
 /*
 **Initialisation (init.c)
 */
