@@ -81,6 +81,7 @@ int					highlgofive(t_list **a, t_list **b);
 /*
 **Free functions (ps_free.c)
 */
+int					free_tab(char **tab);
 int					free_deb_hug(t_list **a, t_list **b, t_opt *o, int debug);
 
 /*

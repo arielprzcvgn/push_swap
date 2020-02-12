@@ -12,6 +12,20 @@
 
 #include "../includes/push_swap.h"
 
+int		free_tab(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return (1);
+}
+
 int		free_list(t_list **list)
 {
 	t_list	*current;
@@ -40,5 +54,6 @@ int		free_deb_hug(t_list **a, t_list **b, t_opt *o, int error)
 		free_list(b);
 	if (o)
 		free(o);
-	return (error == 1 ? 1 : 0);
+	while (1);
+	return (!error ? 1 : 0);
 }
