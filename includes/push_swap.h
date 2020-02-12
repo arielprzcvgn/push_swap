@@ -76,6 +76,7 @@ int					sorting(t_list **a, t_list **b);
 **Sort Algorithm (algolot.c)
 */
 int					algolot(t_list **a, t_list **b);
+char				**bf(t_list **a, t_list **b, int out, char **inst);
 int					highlgofive(t_list **a, t_list **b);
 
 /*

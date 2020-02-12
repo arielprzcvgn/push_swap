@@ -110,9 +110,8 @@ int		algolot(t_list **a, t_list **b)
 	t_move	*m;
 	int		minimove;
 
-	while (*a)
+	while (*a && (current = *a))
 	{
-		current = *a;
 		minimove = -1;
 		while (current)
 		{

@@ -18,28 +18,24 @@
 # include <string.h>
 # include <stdarg.h>
 
-# define MAX(a, b)		(a < b) ? b : a
-# define ABS(a)			(a < 0) ? -a : a
-# define BOOL(a)		(a > 0) ? 1 : 0
-
 # define BUFF_SIZE		64
 # define TROPHY			' '
 
-# define MINUS			(1 << 0)
-# define ZERO			(1 << 1)
-# define PLUS			(1 << 2)
-# define SPACE			(1 << 3)
-# define HASH			(1 << 4)
-# define HASH0			(1 << 5)
-# define APOS			(1 << 6)
-# define PRECI			(1 << 7)
-# define H				(1 << 8)
-# define HH				(1 << 9)
-# define L				(1 << 10)
-# define LL				(1 << 11)
-# define J				(1 << 12)
-# define Z				(1 << 13)
-# define LLL			(1 << 14)
+# define MINUS			1
+# define ZERO			2
+# define PLUS			4
+# define SPACE			8
+# define HASH			16
+# define HASH0			32
+# define APOS			64
+# define PRECI			128
+# define H				256
+# define HH				512
+# define L				1024
+# define LL				2048
+# define J				4096
+# define Z				8192
+# define LLL			16384
 
 typedef struct		s_argument
 {

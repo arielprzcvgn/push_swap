@@ -17,10 +17,12 @@ int		put_o(t_printf *p, unsigned long o)
 	int		total;
 
 	p->a.sign = (p->a.p & HASH && o != 0) ? 1 : 0;
-	p->a.zeros = MAX(p->a.precision - (int)ft_strlen(p->a.arg) - p->a.sign, 0);
+	p->a.zeros = p->a.precision - (int)ft_strlen(p->a.arg) - p->a.sign > 0 ?
+					p->a.precision - (int)ft_strlen(p->a.arg) - p->a.sign : 0;
 	p->a.zeros += p->a.sign;
 	p->a.str = (int)ft_strlen(p->a.arg);
-	p->a.space = MAX(p->a.width - ((int)ft_strlen(p->a.arg) + p->a.zeros), 0);
+	p->a.space = p->a.width - (int)ft_strlen(p->a.arg) - p->a.zeros > 0 ?
+						p->a.width - (int)ft_strlen(p->a.arg) - p->a.zeros : 0;
 	total = p->a.zeros + p->a.str + p->a.space;
 	if (p->a.p & HASH && o == 0 && p->a.precision == 0 && ++total)
 		write(1, "0", 1);

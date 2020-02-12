@@ -84,7 +84,12 @@ int		options(char *opt, t_opt *o)
 		else if (opt[i] == 'v')
 			o->visu = 1;
 		else if (opt[i] == 'd')
+		{
 			o->debug = 1;
+			ft_printf("Usage : ./push_swap $(ARG) ./checker -dvc $(ARG)\n");
+			ft_printf("\t\t\t-d : Debug mode\n\t\t\t-v : Visualisation mode\n");
+			ft_printf("\t\t\t-c : Color mode\n");
+		}
 		else
 			ft_printf("Unknown option. Ignored.\n");
 	}
@@ -101,7 +106,8 @@ int		ps_init(int argc, char **argv, t_list **a, t_opt *o)
 	free_argv = 0;
 	while (o && i < argc && argv[i][0] == '-')
 		options(argv[i++], o);
-	if (i == argc - 1 && !(i = 0) && (free_argv = 1))
+	if (i == argc - 1 && !(i = 0) &&
+						(free_argv = 1))
 		argv = ft_strsplit(argv[argc - 1], ' ');
 	if (i == argc || !argv[i])
 		return (free_deb_hug(a, NULL, o, 0));

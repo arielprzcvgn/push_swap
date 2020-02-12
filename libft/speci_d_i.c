@@ -53,7 +53,9 @@ int		speci_d_i(t_printf *p)
 		d_i = (int)(va_arg(p->ap, int));
 	p->a.str = itoa_printf(d_i, p);
 	p->a.p & APOS ? apostrophe(p) : 0;
-	p->a.zeros = MAX(p->a.precision - p->a.str + p->a.sign, 0);
-	p->a.space = MAX(p->a.width - p->a.str - p->a.zeros, 0);
+	p->a.zeros = p->a.precision - p->a.str + p->a.sign > 0 ?
+							p->a.precision - p->a.str + p->a.sign : 0;
+	p->a.space = p->a.width - p->a.str - p->a.zeros > 0 ?
+							p->a.width - p->a.str - p->a.zeros : 0;
 	return (put_d_i(p));
 }

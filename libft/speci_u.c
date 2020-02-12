@@ -17,8 +17,10 @@ int		put_u(t_printf *p, unsigned long u)
 	int		total;
 
 	p->a.sign = u - u;
-	p->a.zeros = MAX(p->a.precision - (int)ft_strlen(p->a.arg), 0);
-	p->a.space = MAX(p->a.width - p->a.str - p->a.zeros - p->a.sign, 0);
+	p->a.zeros = p->a.precision - (int)ft_strlen(p->a.arg) > 0 ?
+								p->a.precision - (int)ft_strlen(p->a.arg) : 0;
+	p->a.space = p->a.width - p->a.str - p->a.zeros - p->a.sign > 0 ?
+							p->a.width - p->a.str - p->a.zeros - p->a.sign : 0;
 	total = p->a.zeros + p->a.str + p->a.space + p->a.sign;
 	while (!(p->a.p & MINUS) &&
 			(!(p->a.p & ZERO) || p->a.precision != -1) && p->a.space--)

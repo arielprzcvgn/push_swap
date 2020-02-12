@@ -54,6 +54,7 @@ int		free_deb_hug(t_list **a, t_list **b, t_opt *o, int error)
 		free_list(b);
 	if (o)
 		free(o);
-	while (1);
+	while (1)
+		;
 	return (!error ? 1 : 0);
 }

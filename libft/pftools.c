@@ -26,7 +26,7 @@ int		itoa_printf(intmax_t n, t_printf *p)
 		ft_memcpy(p->buffer + p->a.sign, "9223372036854775808", i - 1);
 	else
 	{
-		n = ABS(n);
+		n = (n > 0 ? n : -n);
 		tmp = 1;
 		i = p->a.sign;
 		while (tmp <= n / 10)
