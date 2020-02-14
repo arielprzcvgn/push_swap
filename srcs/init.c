@@ -37,7 +37,10 @@ int		ps_lstadd(t_list **list, int val)
 	while (current)
 	{
 		if (current->val == val)
+		{
+			free(new);
 			return (0);
+		}
 		new->prev = current;
 		current = current->next;
 	}

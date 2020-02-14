@@ -34,6 +34,8 @@ int		instruction(t_list **a, t_list **b, t_opt *o)
 		if (end == 2)
 			break ;
 	}
+	if (*inst)
+		free(*inst);
 	free(inst);
 	return (1);
 }

@@ -40,16 +40,6 @@ OBJ_PS	=	$(SRC_PS:.c=.o)
 OBJ_SHA=	$(SRC_SHA:.c=.o)
 OBJ_LIB	=	$(SRC_LIB:.c=.o)
 
-#O_CHK	=	$(NAME_CHK.c=.o)
-#O_PS	=	$(NAME_PS:.c=.o)
-#O_SHARED=	$(NAME_SHA:.c=.o)
-#LIB_OBJ	=	$(NAME_LIB:.c=.o)
-
-#OBJ_CHK	=	$(addprefix $(OBJ_DIR)/, $(O_CHK))
-#OBJ_PS	=	$(addprefix $(OBJ_DIR)/, $(O_PS))
-#OBJ_SHA	=	$(addprefix $(OBJ_DIR)/, $(O_SHARED))
-#OBJLIB	=	$(addprefix $(OBJ_DIR)/, $(LIB_OBJ))
-
 CC		=	gcc
 FLAGS	=	-Wall -Wextra -Werror
 
