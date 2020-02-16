@@ -61,7 +61,7 @@ int		main(int argc, char **argv)
 	b = NULL;
 	if (argc == 1)
 		return (0);
-	if (!ps_init(argc, argv, &a, NULL) || !sorting(&a, &b))
+	if (ps_init(argc, argv, &a, NULL) == 0 || sorting(&a, &b) == 0)
 		return (-1);
 	free_deb_hug(&a, &b, NULL, 0);
 	return (1);

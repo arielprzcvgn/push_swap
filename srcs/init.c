@@ -79,26 +79,51 @@ int		options(char *opt, t_opt *o)
 {
 	int		i;
 
-	i = 0;
-	while (opt[++i])
+	if (opt == NULL || opt[0] == 0 || *opt != '-' ||
+	(opt[1] != 0 && '0' <= opt[1] && opt[1] <= '9'))
+		return (0);
+	i = 1;
+	while (opt[i] && opt[i] != ' ')
 	{
-		if (opt[i] == 'c')
-			o->color = 1;
-		else if (opt[i] == 'v')
-			o->visu = 1;
-		else if (opt[i] == 'd')
-		{
-			o->debug = 1;
-			ft_printf("Usage : ./push_swap $(ARG) ./checker -dvc $(ARG)\n");
-			ft_printf("\t\t\t-d : Debug mode\n\t\t\t-v : Visualisation mode\n");
-			ft_printf("\t\t\t-c : Color mode\n");
-		}
+		if ((opt[i] == 'c' && (o->color = 1)) ||
+		(opt[i] == 'v' && (o->visu = 1)) ||
+		(opt[i] == 'd' && (o->debug = 1)))
+			i++;
 		else
-			ft_printf("Unknown option. Ignored.\n");
+		{
+			ft_printf("checker: illegal option : %c\n", opt[i]);
+			ft_printf("usage: ./checker [-dvc] [stack]\n");
+			return (-1);
+		}
 	}
 	return (1);
 }
 
+int		ps_init(int argc, char **argv, t_list **a, t_opt *o)
+{
+	int		i;
+	char	**tab;
+	t_list	*current;
+
+	i = 1;
+	while (o && i < argc && options(argv[i], o) == 1)
+		i++;
+	if (i == argc || argv[i][0] == 0 ||
+	(i == argc - 1 && (tab = ft_strsplit(argv[i], ' ')) == NULL) ||
+	(i < argc - 1 && (tab = copy_tab(tab, argv, argc, i)) == NULL))
+		return (free_deb_hug(a, NULL, o, 1));
+	i = 0;
+	while (tab[i])
+		if (!ps_atoi(tab[i++], a))
+			return (free_deb_hug(a, NULL, o, 2));
+	free_tab(tab);
+	current = *a;
+	while (current->next)
+		current = current->next;
+	(*a)->prev = current;
+	return (1);
+}
+/*
 int		ps_init(int argc, char **argv, t_list **a, t_opt *o)
 {
 	int		i;
@@ -124,4 +149,4 @@ int		ps_init(int argc, char **argv, t_list **a, t_opt *o)
 		current = current->next;
 	(*a)->prev = current;
 	return (1);
-}
+}*/

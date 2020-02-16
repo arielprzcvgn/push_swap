@@ -12,6 +12,23 @@
 
 #include "../includes/push_swap.h"
 
+char	**copy_tab(char **tab, char **argv, int argc, int i)
+{
+	int		j;
+
+	j = 0;
+	if ((tab = malloc(sizeof(*tab) * (argc - i + 1))) == NULL)
+		return (NULL);
+	while (i + j < argc)
+	{
+		if ((tab[j] = ft_strdup(argv[i + j])) == NULL)
+			return (NULL);	
+		j++;
+	}
+	tab[j] = NULL;
+	return (tab);
+}
+
 int		free_tab(char **tab)
 {
 	int		i;
@@ -54,7 +71,6 @@ int		free_deb_hug(t_list **a, t_list **b, t_opt *o, int error)
 		free_list(b);
 	if (o)
 		free(o);
-	//while (1)
-	//	;
-	return (!error ? 1 : 0);
+	system("leaks checker");
+	return (error == 0 ? 1 : 0);
 }

@@ -61,6 +61,8 @@ char			**ft_strsplit(char const *s, char c)
 			nbwords++;
 		i++;
 	}
+	if (nbwords == 0)
+		return (NULL);
 	if ((splited = (char **)malloc(sizeof(*splited) * (nbwords + 1))) == NULL ||
 		fill(splited, s, size, c) == 0)
 		return (NULL);
