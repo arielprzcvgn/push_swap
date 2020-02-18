@@ -26,8 +26,7 @@ int		instruction(t_list **a, t_list **b, t_opt *o)
 	while ((end = get_next_line(0, inst)) == 1)
 	{
 		end = chooseop(*inst, a, b, o);
-		if (*inst)
-			free(*inst);
+		free(*inst);
 		*inst = NULL;
 		if (end == 0)
 			return (0);
@@ -46,10 +45,8 @@ int		checker(t_list **a, t_list **b)
 {
 	t_list	*current;
 
-	if (*b != NULL && ft_printf("KO\n"))
+	if ((*b != NULL && ft_printf("KO\n")) || *a == NULL)
 		return (0);
-	if (*a == NULL)
-		return (1);
 	current = *a;
 	while (current->next)
 	{

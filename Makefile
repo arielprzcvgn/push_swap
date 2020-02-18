@@ -59,7 +59,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAMEPS) $(NAMECHK)
-	@rm -f debugchk debugps
+	@rm -f debugchk debugps test
 	@echo "\033[1;31mPush_Swap and Checker has been deleted.\033[0m"
 
 re: fclean all

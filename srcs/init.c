@@ -91,8 +91,9 @@ int		options(char *opt, t_opt *o)
 			i++;
 		else
 		{
-			ft_printf("checker: illegal option : %c\n", opt[i]);
-			ft_printf("usage: ./checker [-dvc] [stack]\n");
+			write(2, "checker: illegal option : ", 27);
+			write(2, &opt[i], 1);
+			write(2, "\nusage: ./checker [-dvc] [stack] [...]\n", 39);
 			return (-1);
 		}
 	}
@@ -102,19 +103,20 @@ int		options(char *opt, t_opt *o)
 int		ps_init(int argc, char **argv, t_list **a, t_opt *o)
 {
 	int		i;
+	int		e;
 	char	**tab;
 	t_list	*current;
 
 	i = 1;
-	while (o && i < argc && options(argv[i], o) == 1)
+	while (o && i < argc && (e = options(argv[i], o)) == 1)
 		i++;
-	if (i == argc || argv[i][0] == 0 ||
+	if (e == -1 || i == argc || argv[i][0] == 0 ||
 	(i == argc - 1 && (tab = ft_strsplit(argv[i], ' ')) == NULL) ||
 	(i < argc - 1 && (tab = copy_tab(tab, argv, argc, i)) == NULL))
 		return (free_deb_hug(a, NULL, o, 1));
 	i = 0;
 	while (tab[i])
-		if (!ps_atoi(tab[i++], a))
+		if (!ps_atoi(tab[i++], a) && free_tab(tab))
 			return (free_deb_hug(a, NULL, o, 2));
 	free_tab(tab);
 	current = *a;
@@ -123,30 +125,3 @@ int		ps_init(int argc, char **argv, t_list **a, t_opt *o)
 	(*a)->prev = current;
 	return (1);
 }
-/*
-int		ps_init(int argc, char **argv, t_list **a, t_opt *o)
-{
-	int		i;
-	int		free_argv;
-	t_list	*current;
-
-	i = 1;
-	free_argv = 0;
-	while (o && i < argc && argv[i][0] == '-')
-		options(argv[i++], o);
-	if (i == argc - 1 && !(i = 0) &&
-						(free_argv = 1))
-		argv = ft_strsplit(argv[argc - 1], ' ');
-	if (i == argc || !argv[i])
-		return (free_deb_hug(a, NULL, o, 0));
-	while (argv[i])
-		if (!ps_atoi(argv[i++], a))
-			return (free_deb_hug(a, NULL, o, 2));
-	if (free_argv)
-		free_tab(argv);
-	current = *a;
-	while (current->next)
-		current = current->next;
-	(*a)->prev = current;
-	return (1);
-}*/

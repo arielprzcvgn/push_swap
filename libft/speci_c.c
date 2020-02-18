@@ -15,7 +15,6 @@
 int		put_c(t_printf *p, char *s)
 {
 	int		total;
-	int		m;
 
 	p->a.zeros = (p->a.p & ZERO && !(p->a.p & MINUS)) ? p->a.width - 1 : 0;
 	p->a.str = 1;

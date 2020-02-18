@@ -22,7 +22,7 @@ char	**copy_tab(char **tab, char **argv, int argc, int i)
 	while (i + j < argc)
 	{
 		if ((tab[j] = ft_strdup(argv[i + j])) == NULL)
-			return (NULL);	
+			return (NULL);
 		j++;
 	}
 	tab[j] = NULL;
@@ -59,6 +59,9 @@ int		free_list(t_list **list)
 
 int		free_deb_hug(t_list **a, t_list **b, t_opt *o, int error)
 {
+	int		leaks;
+
+	leaks = (o && o->debug) ? 1 : 0;
 	if (error)
 		write(2, "Error\n", 6);
 	if (error && o && o->debug &&
@@ -71,6 +74,7 @@ int		free_deb_hug(t_list **a, t_list **b, t_opt *o, int error)
 		free_list(b);
 	if (o)
 		free(o);
-	system("leaks checker");
-	return (error == 0 ? 1 : 0);
+	if (leaks)
+		system("leaks checker");
+	return (error ? 0 : 1);
 }

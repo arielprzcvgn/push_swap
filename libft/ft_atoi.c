@@ -15,26 +15,17 @@
 int		ft_atoi(const char *str)
 {
 	int		i;
-	int		negative;
-	int		number;
+	int		neg;
+	int		nbr;
 
 	i = 0;
-	negative = 1;
-	while ((9 <= *(str + i) && *(str + i) <= 13) || *(str + i) == 32)
+	neg = 1;
+	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
 		i++;
-	if (*(str + i) == '+')
+	if ((str[i] == '+') || (str[i] == '-' && (neg = -1)))
 		i++;
-	else if (*(str + i) == '-')
-	{
-		negative = -1;
-		i++;
-	}
-	number = 0;
-	while ('0' <= *(str + i) && *(str + i) <= '9')
-	{
-		number *= 10;
-		number += (*(str + i) - '0');
-		i++;
-	}
-	return (negative * number);
+	nbr = 0;
+	while ('0' <= str[i] && str[i] <= '9')
+		nbr = nbr * 10 + (str[i++] - '0');
+	return (neg * nbr);
 }

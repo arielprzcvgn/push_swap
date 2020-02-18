@@ -89,6 +89,7 @@ int					free_deb_hug(t_list **a, t_list **b, t_opt *o, int debug);
 /*
 **libft
 */
+int					ft_atoi(const char *str);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strlen(const char *s);
 void				ft_strclr(char *s);
